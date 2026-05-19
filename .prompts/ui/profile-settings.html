@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LARI - Profile &amp; Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-silver-white text-on-background min-h-screen flex flex-col pt-16 pb-20">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface border-b-2 border-biru-gelap md:hidden">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-biru-gelap">
+                <img alt="User profile picture" class="w-full h-full object-cover"
+                    data-alt="A close-up portrait of a young man outdoors during daytime, wearing a casual athletic jacket. The lighting is bright and natural, reflecting an energetic, active lifestyle suitable for a modern fitness app. The overall color palette is light and punchy."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyWGHjtS0msrkSLntEgGaF5lkw3GjJHacTSZUpIK0CokQM8ca9dS19exYRpC2CX1BU2yjbQmaRj8uGig5ImJbFn8zEaQEXWqqXBAGBwE5L5e0YOthxDo49r_g3Vb7RWh9xYGXK6UnF--0Bx08yr-Hj-DtF5A22qNadYtsiJ3wzkz5Qw5bt4YbPqrQtN78vitJzoQktSmf-zNbq_qhDhiniUCuD081bPRAnrcbmNURwtcS4XFx-TRtSUu1OxYEqv3TUKTo0qlBPu0s" />
+            </div>
+            <span class="font-headline-sm-mobile text-headline-sm-mobile text-biru-gelap font-bold">Profile</span>
+        </div>
+        <span
+            class="font-headline-md text-headline-md font-black tracking-tighter text-merah italic absolute left-1/2 -translate-x-1/2">LARI</span>
+        <button class="text-merah active:scale-95 transition-transform p-2 rounded-full hover:bg-surface-variant">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+        </button>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="flex-grow w-full max-w-md mx-auto px-margin-mobile py-6 flex flex-col gap-6 md:hidden">
+        <!-- Profile Header Card -->
+        <section
+            class="bg-surface rounded-xl border-2 border-biru-gelap p-6 flex flex-col items-center gap-4 shadow-[0_4px_0px_0px_rgba(44,90,100,0.2)]">
+            <div class="relative">
+                <div
+                    class="w-24 h-24 rounded-full border-4 border-surface bg-surface-container-high overflow-hidden shadow-sm">
+                    <img alt="User Avatar" class="w-full h-full object-cover"
+                        data-alt="A portrait of a young man in bright daylight, representing an active runner. The image is crisp and vibrant, set against a light background, fitting a dynamic outdoor sports app aesthetic. High contrast and clean lighting."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMC47lAq9yOjRwCSUG9s22Yk8JBc-HPdDd3_KssYVB6ziuydcc0MAmsLI4CqcoxKPsFkTW1A5U-bNsBXomb8C4BIw4Y1UcHRf3wtasQ1WRnnd6ld77OF_f5k7pN4mHub41PaV-wzPnbloeMHSKKG3gAXpUaPPyaQ1S9mZmCKOYq2HtnGfECCNQ724CjtsgG_IXuwC9iT7HPDs1mcJdbrqWjCHTHGKacDxVCEowFbWgCIXgmrDf6cSdW7otlbRJqoDgLbXMZQnnNG1V" />
+                </div>
+                <button
+                    class="absolute bottom-0 right-0 bg-merah text-on-primary w-8 h-8 rounded-full border-2 border-surface flex items-center justify-center active:scale-95 transition-transform shadow-[0_2px_0px_0px_rgba(44,90,100,1)]">
+                    <span class="material-symbols-outlined text-[18px]">edit</span>
+                </button>
+            </div>
+            <div class="text-center">
+                <h1 class="font-headline-md text-headline-md text-biru-gelap mb-1">Budi Santoso</h1>
+                <p class="font-label-md text-label-md text-on-surface-variant">budi.runner@email.com</p>
+            </div>
+            <div class="flex gap-4 mt-2 w-full">
+                <div class="flex-1 bg-surface-container p-3 rounded-lg border border-biru-gelap/20 text-center">
+                    <p class="font-headline-sm text-headline-sm text-merah">42</p>
+                    <p class="font-label-sm text-label-sm text-biru-gelap">Total Runs</p>
+                </div>
+                <div class="flex-1 bg-surface-container p-3 rounded-lg border border-biru-gelap/20 text-center">
+                    <p class="font-headline-sm text-headline-sm text-merah">185</p>
+                    <p class="font-label-sm text-label-sm text-biru-gelap">Total Km</p>
+                </div>
+            </div>
+        </section>
+        <!-- Settings List -->
+        <section class="flex flex-col gap-3">
+            <h2 class="font-label-md text-label-md text-biru-gelap uppercase tracking-wider pl-2 mt-2">Account</h2>
+            <button
+                class="w-full bg-surface p-4 rounded-xl border border-biru-gelap/30 flex items-center justify-between active:translate-y-1 transition-all shadow-[0_2px_0px_0px_rgba(44,90,100,0.1)] hover:bg-surface-variant">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-biru-muda/20 flex items-center justify-center text-biru-gelap">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <span class="font-body-md text-body-md font-semibold text-on-surface">Personal Information</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+            </button>
+            <button
+                class="w-full bg-surface p-4 rounded-xl border border-biru-gelap/30 flex items-center justify-between active:translate-y-1 transition-all shadow-[0_2px_0px_0px_rgba(44,90,100,0.1)] hover:bg-surface-variant">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-biru-muda/20 flex items-center justify-center text-biru-gelap">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <span class="font-body-md text-body-md font-semibold text-on-surface">Privacy &amp; Security</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+            </button>
+            <h2 class="font-label-md text-label-md text-biru-gelap uppercase tracking-wider pl-2 mt-4">Preferences</h2>
+            <button
+                class="w-full bg-surface p-4 rounded-xl border border-biru-gelap/30 flex items-center justify-between active:translate-y-1 transition-all shadow-[0_2px_0px_0px_rgba(44,90,100,0.1)] hover:bg-surface-variant">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-biru-muda/20 flex items-center justify-center text-biru-gelap">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </div>
+                    <span class="font-body-md text-body-md font-semibold text-on-surface">Notifications</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+            </button>
+            <button
+                class="w-full bg-surface p-4 rounded-xl border border-biru-gelap/30 flex items-center justify-between active:translate-y-1 transition-all shadow-[0_2px_0px_0px_rgba(44,90,100,0.1)] hover:bg-surface-variant">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-biru-muda/20 flex items-center justify-center text-biru-gelap">
+                        <span class="material-symbols-outlined">language</span>
+                    </div>
+                    <span class="font-body-md text-body-md font-semibold text-on-surface">Language</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">English</span>
+                    <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+                </div>
+            </button>
+        </section>
+        <!-- Log Out Button -->
+        <button
+            class="w-full mt-6 bg-surface p-4 rounded-xl border-2 border-merah text-merah font-body-md text-body-md font-bold flex items-center justify-center gap-2 active:translate-y-1 transition-all shadow-[0_4px_0px_0px_#C72222]">
+            <span class="material-symbols-outlined">logout</span>
+            Log Out
+        </button>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 bg-surface h-20 pb-safe md:hidden border-t-2 border-biru-gelap shadow-[0_-4px_0px_0px_rgba(44,90,100,0.1)]">
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors rounded-lg px-4 py-1 active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">home</span>
+            <span class="font-label-sm text-label-sm">Home</span>
+        </button>
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors rounded-lg px-4 py-1 active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">history</span>
+            <span class="font-label-sm text-label-sm">History</span>
+        </button>
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors rounded-lg px-4 py-1 active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">leaderboard</span>
+            <span class="font-label-sm text-label-sm">Leaderboard</span>
+        </button>
+        <!-- Active State for Profile -->
+        <button
+            class="flex flex-col items-center justify-center bg-merah text-on-primary rounded-lg border-2 border-biru-gelap px-4 py-1 active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+            <span class="font-label-sm text-label-sm">Profile</span>
+        </button>
+    </nav>
+</body>
+
+</html>

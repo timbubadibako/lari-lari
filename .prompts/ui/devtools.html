@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>LARI DevTools</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Soft Brutalism Toggle Switch */
+        .brutal-toggle:checked+div {
+            background-color: #C72222;
+            /* merah */
+        }
+
+        .brutal-toggle:checked+div>div {
+            transform: translateX(100%);
+            border-color: #2C5A64;
+            /* biru-gelap */
+        }
+
+        /* Custom Scrollbar for logs */
+        .log-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .log-scroll::-webkit-scrollbar-track {
+            background: #f9f9f9;
+            border-left: 2px solid #2C5A64;
+        }
+
+        .log-scroll::-webkit-scrollbar-thumb {
+            background: #2C5A64;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-silver-white text-on-surface font-body-md antialiased overflow-x-hidden w-full h-screen flex flex-col md:hidden">
+    <!-- TopAppBar Semantic Shell -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface dark:bg-inverse-surface border-b-2 border-biru-gelap dark:border-silver-white active:scale-95 transition-transform">
+        <div class="flex items-center gap-2">
+            <!-- Leading: Avatar placeholder for "User profile picture" -->
+            <div
+                class="w-8 h-8 rounded-full border-2 border-biru-gelap bg-surface-variant overflow-hidden flex-shrink-0">
+                <img alt="User Profile Picture" class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKLZC9YmmoyO4MiARL1kkG_roukJtaXGY078zzUFM_AHCsxEHwEgcceFZmtvCHb4QU9bWoYTdoKhD93OJzjEuJIXmrajwqMlU9NGECcZe85fBDAUwYfRSpVT4VnBHCrt5RGJGJxXDEaAYmDymVnezxy-IJ5owUO0UUnsf1C15OGlqUwfDKFU6k93T_4mVyPoR10vRt0F9eOK4_GR451Rl724ArJ1K-QzmRA1XGiyjl1e5emGb5ChLiyaMkukRFW1af50rnENIZBThu" />
+            </div>
+            <h1 class="font-headline-md text-headline-md font-black tracking-tighter text-merah italic ml-2">LARI</h1>
+        </div>
+        <!-- Trailing: Icon -->
+        <button aria-label="notifications"
+            class="p-2 text-merah dark:text-inverse-primary hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors rounded-full">
+            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+        </button>
+    </header>
+    <!-- Main Content Canvas (Padded for Top/Bottom Nav) -->
+    <main class="flex-1 mt-16 mb-20 p-margin-mobile overflow-y-auto w-full">
+        <!-- Header Section -->
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-biru-gelap tracking-tight">DevTools</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-1">Environment: Staging v2.4.1</p>
+            </div>
+            <span class="material-symbols-outlined text-merah text-3xl" data-icon="code">code</span>
+        </div>
+        <!-- Fake GPS Module (Soft Brutalism Card) -->
+        <section
+            class="bg-surface-container-lowest border-2 border-biru-gelap rounded-lg shadow-[4px_4px_0px_0px_#2C5A64] p-4 mb-6 relative overflow-hidden">
+            <!-- Decorative Accent -->
+            <div class="absolute top-0 right-0 w-16 h-16 bg-biru-muda/20 rounded-bl-full -z-0"></div>
+            <div class="flex items-center justify-between mb-4 relative z-10">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-merah" data-icon="location_on" data-weight="fill"
+                        style="font-variation-settings: 'FILL' 1;">location_on</span>
+                    <h3 class="font-headline-sm text-headline-sm text-biru-gelap">Fake GPS Simulator</h3>
+                </div>
+                <!-- Brutal Toggle -->
+                <label class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input checked="" class="sr-only brutal-toggle" id="gpsToggle" type="checkbox" />
+                        <div
+                            class="block bg-surface-variant border-2 border-biru-gelap w-14 h-8 rounded-full transition-colors duration-200">
+                            <div
+                                class="dot absolute left-1 top-1 bg-surface-container-lowest w-5 h-5 rounded-full transition transform border-2 border-biru-gelap">
+                            </div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <!-- Coordinate Inputs -->
+            <div class="grid grid-cols-2 gap-4 mb-4 relative z-10">
+                <div>
+                    <label
+                        class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Latitude</label>
+                    <input
+                        class="w-full bg-surface border-2 border-biru-gelap rounded p-2 font-body-md text-body-md focus:outline-none focus:border-merah transition-colors"
+                        readonly="" type="text" value="-6.2088" />
+                </div>
+                <div>
+                    <label
+                        class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Longitude</label>
+                    <input
+                        class="w-full bg-surface border-2 border-biru-gelap rounded p-2 font-body-md text-body-md focus:outline-none focus:border-merah transition-colors"
+                        readonly="" type="text" value="106.8456" />
+                </div>
+            </div>
+            <!-- Presets -->
+            <div class="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 no-scrollbar relative z-10">
+                <button
+                    class="flex-shrink-0 bg-merah text-on-primary border-2 border-biru-gelap rounded-full px-4 py-1.5 font-label-md text-label-md shadow-[2px_2px_0px_0px_#2C5A64] active:translate-y-0.5 active:translate-x-0.5 active:shadow-[0px_0px_0px_0px_#2C5A64] transition-all">
+                    Monas, JKT
+                </button>
+                <button
+                    class="flex-shrink-0 bg-surface text-biru-gelap border-2 border-biru-gelap rounded-full px-4 py-1.5 font-label-md text-label-md shadow-[2px_2px_0px_0px_#2C5A64] active:translate-y-0.5 active:translate-x-0.5 active:shadow-[0px_0px_0px_0px_#2C5A64] transition-all">
+                    GBK Stadium
+                </button>
+                <button
+                    class="flex-shrink-0 bg-surface text-biru-gelap border-2 border-biru-gelap rounded-full px-4 py-1.5 font-label-md text-label-md shadow-[2px_2px_0px_0px_#2C5A64] active:translate-y-0.5 active:translate-x-0.5 active:shadow-[0px_0px_0px_0px_#2C5A64] transition-all">
+                    Custom...
+                </button>
+            </div>
+            <button
+                class="mt-4 w-full bg-biru-muda text-biru-gelap border-2 border-biru-gelap rounded p-3 font-label-md text-label-md flex justify-center items-center gap-2 active:bg-biru-muda/80 transition-colors">
+                <span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                Force Sync Location
+            </button>
+        </section>
+        <!-- Developer Logs (Terminal Style) -->
+        <section
+            class="bg-inverse-surface border-2 border-biru-gelap rounded-lg shadow-[4px_4px_0px_0px_#2C5A64] overflow-hidden flex flex-col h-64">
+            <div class="bg-biru-gelap px-3 py-2 flex justify-between items-center">
+                <span
+                    class="font-label-sm text-label-sm text-on-primary tracking-wider uppercase flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span> System Logs
+                </span>
+                <button class="text-biru-muda hover:text-on-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+                </button>
+            </div>
+            <div class="p-3 font-mono text-[11px] leading-relaxed text-silver-white overflow-y-auto log-scroll flex-1">
+                <div class="text-biru-muda">[10:42:01] LARI App Initialized.</div>
+                <div class="text-silver-white">[10:42:02] Location services requested...</div>
+                <div class="text-merah font-bold">[10:42:02] WARN: Mock location enabled by DevTools.</div>
+                <div class="text-silver-white">[10:42:03] GPS Lock acquired: Lat -6.2088, Lng 106.8456</div>
+                <div class="text-silver-white">[10:42:05] WebSocket connected to wss://staging.lari.app</div>
+                <div class="text-silver-white">[10:42:15] Pinging tracking service... 45ms</div>
+                <div class="text-silver-white">[10:42:30] Activity state updated: IDLE -&gt; WALKING</div>
+                <div class="text-biru-muda">[10:43:00] Syncing offline payload (0 items).</div>
+                <div class="text-silver-white animate-pulse">_</div>
+            </div>
+        </section>
+    </main>
+    <!-- BottomNavBar Semantic Shell (Profile Active for Settings Context) -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 bg-surface dark:bg-inverse-surface h-20 pb-safe border-t-2 border-biru-gelap dark:border-silver-white shadow-[0_-4px_0px_0px_rgba(44,90,100,0.1)] active:translate-y-1 transition-all duration-75">
+        <!-- Inactive: Home -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+            <span class="font-label-sm text-label-sm">Home</span>
+        </a>
+        <!-- Inactive: History -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="history">history</span>
+            <span class="font-label-sm text-label-sm">History</span>
+        </a>
+        <!-- Inactive: Leaderboard -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="leaderboard">leaderboard</span>
+            <span class="font-label-sm text-label-sm">Leaderboard</span>
+        </a>
+        <!-- Active: Profile (Settings Context) -->
+        <a class="flex flex-col items-center justify-center bg-merah text-on-primary rounded-lg border-2 border-biru-gelap px-4 py-1 hover:bg-biru-muda/20 transition-colors h-[56px]"
+            href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="person" data-weight="fill"
+                style="font-variation-settings: 'FILL' 1;">person</span>
+            <span class="font-label-sm text-label-sm">Profile</span>
+        </a>
+    </nav>
+    <script>
+        // Simple micro-interaction for toggle
+        document.getElementById('gpsToggle').addEventListener('change', function (e) {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            if (e.target.checked) {
+                inputs.forEach(input => {
+                    input.classList.remove('opacity-50');
+                    input.parentElement.querySelector('label').classList.remove('opacity-50');
+                });
+            } else {
+                inputs.forEach(input => {
+                    input.classList.add('opacity-50');
+                    input.parentElement.querySelector('label').classList.add('opacity-50');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

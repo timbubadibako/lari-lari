@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LARI - Live Workout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Mobile Specific Layout */
+        body {
+            background-color: theme('colors.silver-white');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .mobile-container {
+            width: 100%;
+            max-width: 414px; /* Typical mobile width */
+            height: 100vh;
+            max-height: 896px; /* 18:9 ratio approximation */
+            background-color: theme('colors.surface');
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Subtle shadow for presentation */
+        }
+        
+        /* Soft Brutalism Map Line */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 35%; /* Small map segment */
+            background-color: theme('colors.silver-white');
+            border-bottom: 3px solid theme('colors.biru-gelap');
+            overflow: hidden;
+        }
+        
+        .route-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .route-path {
+            fill: none;
+            stroke: theme('colors.merah');
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            /* Filter for soft brutalism shadow effect on the line itself */
+            filter: drop-shadow(0px 3px 0px theme('colors.biru-gelap'));
+        }
+        
+        .current-location {
+            fill: theme('colors.on-primary');
+            stroke: theme('colors.biru-gelap');
+            stroke-width: 3;
+        }
+
+        /* Metric HUD */
+        .metrics-grid {
+            flex-grow: 1;
+            padding: theme('spacing.margin-mobile');
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: theme('spacing.gutter');
+            align-content: center;
+        }
+
+        .metric-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 2px solid theme('colors.biru-gelap');
+            border-radius: theme('borderRadius.lg');
+            padding: theme('spacing.gutter');
+            text-align: center;
+            /* Soft Brutalism Lift */
+            box-shadow: 0px 4px 0px 0px theme('colors.biru-gelap');
+        }
+        
+        .metric-card.primary {
+            grid-column: span 2;
+            padding-top: 32px;
+            padding-bottom: 32px;
+        }
+
+        /* Actions */
+        .actions-container {
+            padding: theme('spacing.margin-mobile');
+            display: flex;
+            gap: theme('spacing.gutter');
+            background-color: theme('colors.surface');
+            z-index: 10;
+        }
+        
+        .btn-action {
+            flex: 1;
+            height: 64px; /* Large touch target */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border-radius: theme('borderRadius.lg');
+            border: 3px solid theme('colors.biru-gelap');
+            box-shadow: 0px 4px 0px 0px theme('colors.biru-gelap');
+            transition: all 0.1s;
+        }
+        
+        .btn-action:active {
+            transform: translateY(4px);
+            box-shadow: 0px 0px 0px 0px theme('colors.biru-gelap');
+        }
+
+        .btn-pause {
+            background-color: theme('colors.surface-container-lowest');
+            color: theme('colors.biru-gelap');
+        }
+        
+        .btn-stop {
+            background-color: theme('colors.merah');
+            color: theme('colors.on-primary');
+            border-color: theme('colors.biru-gelap');
+        }
+        
+        /* GPS Signal Indicator */
+        .gps-indicator {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: theme('colors.surface-container-lowest');
+            border: 2px solid theme('colors.biru-gelap');
+            border-radius: theme('borderRadius.full');
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 20;
+            box-shadow: 0px 2px 0px 0px theme('colors.biru-gelap');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="mobile-container">
+<!-- GPS Signal -->
+<div class="gps-indicator">
+<span class="material-symbols-outlined text-biru-gelap" style="font-size: 16px;">satellite_alt</span>
+<span class="font-label-sm text-label-sm text-biru-gelap uppercase tracking-widest">GPS Ready</span>
+</div>
+<!-- Map Segment -->
+<div class="map-container">
+<!-- Background map texture/pattern to simulate streets without an image -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(theme('colors.biru-gelap') 1px, transparent 1px); background-size: 20px 20px;"></div>
+<svg class="route-svg" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- A minimalist route line -->
+<path class="route-path" d="M -10,80 Q 20,60 40,40 T 70,50 T 110,20"></path>
+<!-- Current Location Dot -->
+<circle class="current-location" cx="70" cy="50" r="4"></circle>
+</svg>
+</div>
+<!-- HUD Metrics -->
+<div class="metrics-grid">
+<!-- Duration (Primary Metric) -->
+<div class="metric-card primary flex flex-col items-center justify-center">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-1">Duration</span>
+<span class="font-headline-xl text-headline-xl text-biru-gelap font-black tabular-nums tracking-tighter" style="font-size: 56px; line-height: 56px;">00:42:15</span>
+</div>
+<!-- Distance -->
+<div class="metric-card flex flex-col items-center justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Distance</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-merah font-black tabular-nums tracking-tight">5.2</span>
+<span class="font-label-md text-label-md text-merah font-bold">km</span>
+</div>
+</div>
+<!-- Pace -->
+<div class="metric-card flex flex-col items-center justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Avg Pace</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-biru-gelap font-black tabular-nums tracking-tight">5'40"</span>
+<span class="font-label-md text-label-md text-biru-gelap font-bold">/km</span>
+</div>
+</div>
+<!-- Heart Rate (Optional contextual metric) -->
+<div class="metric-card primary flex flex-row items-center justify-center gap-4 py-4" style="padding-top: 16px; padding-bottom: 16px;">
+<span class="material-symbols-outlined text-merah animate-pulse">favorite</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-biru-gelap font-black tabular-nums">142</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-bold">bpm</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="actions-container">
+<button class="btn-action btn-pause">
+<span class="material-symbols-outlined" style="font-size: 28px;">pause</span>
+<span class="font-headline-sm text-headline-sm uppercase tracking-widest">Pause</span>
+</button>
+<button class="btn-action btn-stop">
+<span class="material-symbols-outlined" style="font-size: 28px;">stop</span>
+<span class="font-headline-sm text-headline-sm uppercase tracking-widest">Stop</span>
+</button>
+</div>
+</div>
+<script>
+        // Simple script to handle button press states visually for demonstration
+        document.querySelectorAll('.btn-action').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(4px)';
+                this.style.boxShadow = '0px 0px 0px 0px var(--tw-shadow-color)';
+            });
+            btn.addEventListener('touchend', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0px 4px 0px 0px var(--tw-shadow-color)';
+            });
+        });
+    </script>
+</body></html>

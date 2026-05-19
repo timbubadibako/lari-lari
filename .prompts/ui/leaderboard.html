@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LARI Leaderboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "safe": "env(safe-area-inset-bottom)"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: theme('colors.silver-white');
+        }
+
+        /* Mobile specific ratio constraint for preview */
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: #333;
+            }
+
+            .mobile-container {
+                width: 375px;
+                height: 812px;
+                /* ~18:9 ratio */
+                background-color: theme('colors.silver-white');
+                overflow-y: auto;
+                position: relative;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="text-on-background font-body-md antialiased">
+    <div class="mobile-container w-full min-h-screen relative pb-24">
+        <!-- TopAppBar -->
+        <header
+            class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface dark:bg-inverse-surface md:absolute border-b-2 border-biru-gelap dark:border-silver-white shadow-sm">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-full overflow-hidden border-2 border-biru-gelap bg-surface-variant flex-shrink-0">
+                    <img alt="User profile" class="w-full h-full object-cover"
+                        data-alt="Close up portrait of a young athletic woman with a confident expression, soft natural lighting, outdoor setting hinting at a run, vibrant colors with deep red and deep blue accents aligning with LARI brand, shallow depth of field."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6cQTX9JLzpGJKtfhIJMeKnKGvzXfUBUUKvsHYio4kzy9D4ZXGMb2BYIeja-7U237CXdiEkTdFylxbLHgpM9OP9mDaBQiBgsWXWJ0Oj28EnOr6VWTdLi4basMZFBAdj7UYpyUWs1mCl90qzTSfIyywI4u2si36XY4Zep4Gxs5R8dYIcRHmoOAZDINxy4Ixua5O9Mp_Pibx_9VXt-FCCVb4KKVagTcEm6p42Exq9-5lkFm2DE4lKOL66dFTaklbOj4zVzGAeTEM-TCq" />
+                </div>
+            </div>
+            <div class="font-headline-md text-headline-md font-black tracking-tighter text-merah italic">
+                LARI
+            </div>
+            <div
+                class="text-merah dark:text-inverse-primary hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 transition-transform flex items-center justify-center cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="pt-20 px-margin-mobile pb-10">
+            <!-- Page Header -->
+            <div class="mb-6">
+                <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-biru-gelap uppercase tracking-tight">
+                    Leaderboard</h1>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-1">See who's leading the pack.</p>
+            </div>
+            <!-- Timeframe Tabs (Bento Style) -->
+            <div
+                class="grid grid-cols-3 gap-2 mb-8 bg-surface-container-lowest p-1 rounded-xl border-2 border-biru-gelap shadow-[0_4px_0px_0px_rgba(44,90,100,1)]">
+                <button
+                    class="py-2 px-1 text-center rounded-lg bg-merah text-on-primary font-label-md text-label-md border-2 border-biru-gelap active:translate-y-1 transition-all duration-75">Weekly</button>
+                <button
+                    class="py-2 px-1 text-center rounded-lg text-biru-gelap font-label-md text-label-md hover:bg-biru-muda/20 transition-colors">Monthly</button>
+                <button
+                    class="py-2 px-1 text-center rounded-lg text-biru-gelap font-label-md text-label-md hover:bg-biru-muda/20 transition-colors">All-Time</button>
+            </div>
+            <!-- Top 3 Podium (Asymmetric Layout) -->
+            <div class="flex items-end justify-center gap-2 mb-10 h-48 relative">
+                <!-- Rank 2 -->
+                <div class="flex flex-col items-center w-1/3 h-[85%] relative">
+                    <div
+                        class="absolute -top-10 w-14 h-14 rounded-full overflow-hidden border-2 border-biru-gelap bg-surface-variant z-10 shadow-[0_4px_0px_0px_rgba(44,90,100,1)]">
+                        <img alt="Runner 2" class="w-full h-full object-cover"
+                            data-alt="Portrait of an athletic male runner smiling, slightly sweaty, outdoors with a bright blue sky background, soft lighting, vibrant contrasting red and deep blue UI aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWg5AvQJ60ArrbD510e3RE5ZD3NFvvoK7wSr7VLac1vXo30pUfuMYy7jqQ7EnPNnCw0cIHMImPKApI4Ob3Kri_XiSgLshIWLFp5UgVx8hV7GB4XWGQnF3YdUX6eh6c2NsWH14uToPmzgHBGlryxVjdZXLrTNRxBEyi8PGnaRSPSHbdiDRT6MN7q8w9EQ6XyB446QTs34rxzlDu8JeD23FE2yCCXPig4LHT4aWHvbeQomQsLgRbAdEC4QQ6Th3ChagaJSSGXl4A9Tdl" />
+                    </div>
+                    <div
+                        class="w-full h-full bg-surface-container-lowest border-2 border-biru-gelap rounded-t-xl flex flex-col items-center justify-start pt-6 shadow-[0_4px_0px_0px_rgba(44,90,100,1)] bg-gradient-to-b from-silver-white to-surface-container-lowest">
+                        <span class="font-headline-md text-headline-md text-biru-gelap">2</span>
+                        <span
+                            class="font-label-sm text-label-sm text-on-surface-variant truncate w-full text-center px-1">Alex
+                            T.</span>
+                        <span class="font-label-md text-label-md text-merah mt-1">42km</span>
+                    </div>
+                </div>
+                <!-- Rank 1 -->
+                <div class="flex flex-col items-center w-1/3 h-full relative z-10">
+                    <div
+                        class="absolute -top-12 w-16 h-16 rounded-full overflow-hidden border-4 border-merah bg-surface-variant z-10 shadow-[0_4px_0px_0px_rgba(199,34,34,1)]">
+                        <img alt="Runner 1" class="w-full h-full object-cover"
+                            data-alt="Close up portrait of a young athletic woman, intensely focused, wearing a vibrant red running top, outdoor park setting, high contrast lighting emphasizing modern minimal LARI design system."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNM6F_l_z5gdXU_hcsrwZL7_Yftal6v_asC8vaHlFVfUk2p5AtYPNMdwUGPAGeJt-rIVV1wFe9rpCXgrajCBw-motjzVGuVO198qsqCG19ViiIo-E_DkLxJJvpmdl75LzF_LXPF087LnMiAMk9t0h1UpCfHd45z2FP0MiN2I2uM4KjEmqaBjYLG1MiyQvPa41W-C0-QbZR6SZ9CQegxoij_hU-EBqzl9s4vY6cvuhid2YDLzb-gqt8y8SVTdTRp3Mbpe7io5dJTRG" />
+                    </div>
+                    <span
+                        class="absolute -top-4 -right-2 material-symbols-outlined text-merah bg-surface-container-lowest rounded-full border-2 border-biru-gelap p-0.5 text-[16px] z-20"
+                        data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <div
+                        class="w-full h-full bg-merah border-2 border-biru-gelap rounded-t-xl flex flex-col items-center justify-start pt-8 shadow-[0_4px_0px_0px_rgba(44,90,100,1)]">
+                        <span class="font-headline-md text-headline-md text-on-primary">1</span>
+                        <span
+                            class="font-label-md text-label-md text-on-primary font-bold truncate w-full text-center px-1">Sarah
+                            M.</span>
+                        <span
+                            class="font-label-md text-label-md text-on-primary bg-biru-gelap px-2 py-0.5 rounded-full mt-1">56km</span>
+                    </div>
+                </div>
+                <!-- Rank 3 -->
+                <div class="flex flex-col items-center w-1/3 h-[70%] relative">
+                    <div
+                        class="absolute -top-8 w-12 h-12 rounded-full overflow-hidden border-2 border-biru-gelap bg-surface-variant z-10 shadow-[0_4px_0px_0px_rgba(44,90,100,1)]">
+                        <img alt="Runner 3" class="w-full h-full object-cover"
+                            data-alt="Portrait of an older athletic man, determination in his eyes, bright outdoor lighting, clear white and gray tones with deep blue and red brand accents, modern soft brutalism vibe."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIz6PtJpSSBFgoQP7pm4powHgLiOBEjS7B8lDbJTcdWvwQEvB4AJK3dUZRkTQpj80eGdni6Wodf53quNN11UkNFBvuCGz38Y85gmVFrUEzKcHsWpUeWahCjWsWNrB-mA8IxSiKl4L0dnn5g4T8HsGrZ8hbgn3iofw2Lxwhc515kHgNMT1M1a-Cql0v2cvMd8mXCzMIssdQg2CMFFv92-nNYGOWMmGoHGS8X_5XgBnvqgfXAu_HTgiohHYymCBH7ChX5Etc-RtUTvCr" />
+                    </div>
+                    <div
+                        class="w-full h-full bg-surface-container-lowest border-2 border-biru-gelap rounded-t-xl flex flex-col items-center justify-start pt-5 shadow-[0_4px_0px_0px_rgba(44,90,100,1)] bg-gradient-to-b from-silver-white to-surface-container-lowest">
+                        <span class="font-headline-sm text-headline-sm text-biru-gelap">3</span>
+                        <span
+                            class="font-label-sm text-label-sm text-on-surface-variant truncate w-full text-center px-1">David
+                            K.</span>
+                        <span class="font-label-sm text-label-sm text-merah mt-1 font-bold">38km</span>
+                    </div>
+                </div>
+            </div>
+            <!-- List Section -->
+            <div class="flex flex-col gap-3">
+                <!-- List Item 4 -->
+                <div
+                    class="flex items-center bg-surface-container-lowest border-2 border-biru-gelap rounded-xl p-3 shadow-[0_4px_0px_0px_rgba(44,90,100,1)] active:translate-y-1 transition-all duration-75 cursor-pointer">
+                    <div class="font-headline-sm text-headline-sm text-biru-gelap w-8 text-center">4</div>
+                    <div
+                        class="w-10 h-10 rounded-full overflow-hidden border-2 border-biru-gelap mr-3 bg-surface-variant">
+                        <img alt="Runner 4" class="w-full h-full object-cover"
+                            data-alt="Profile picture of a female runner in action, blurred background showing speed, high contrast red and white tones, soft daylight."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP4368AAQ_VGMty2YKzXx2Tg3vonm11qJN9aT7xcN_pwcDoEH9WLtq9_AEWKx9HeoKpv3SEGYhM69K7cJMX5BlMirkNZb4dKanJIYEzztArn1H8asONqxatniG1jxks_S-9c6CuI2Ks0D3pmc88nLpLxqe6MFmPR9VX8pHnwiy0NXfe6KSX3W8Y1x1smmOM_Cqqjl8xN6URKy3y5JhegzfSvD2wYYymeJFH2hTcSndRyGHReUbzN3eAJt5Wmkwo6sEKfedopC3kvIO" />
+                    </div>
+                    <div class="flex-grow">
+                        <div class="font-label-md text-label-md text-on-surface">Emma Watson</div>
+                        <div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span> 4h 12m
+                        </div>
+                    </div>
+                    <div class="font-headline-sm text-headline-sm text-merah">35<span class="text-label-sm">km</span>
+                    </div>
+                </div>
+                <!-- List Item 5 -->
+                <div
+                    class="flex items-center bg-surface-container-lowest border-2 border-biru-gelap rounded-xl p-3 shadow-[0_4px_0px_0px_rgba(44,90,100,1)] active:translate-y-1 transition-all duration-75 cursor-pointer">
+                    <div class="font-headline-sm text-headline-sm text-biru-gelap w-8 text-center">5</div>
+                    <div
+                        class="w-10 h-10 rounded-full overflow-hidden border-2 border-biru-gelap mr-3 bg-surface-variant flex items-center justify-center bg-biru-muda/20">
+                        <span class="font-headline-sm text-headline-sm text-biru-gelap">J</span>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="font-label-md text-label-md text-on-surface">James R.</div>
+                        <div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span> 3h 45m
+                        </div>
+                    </div>
+                    <div class="font-headline-sm text-headline-sm text-merah">31<span class="text-label-sm">km</span>
+                    </div>
+                </div>
+                <!-- Current User Context (Sticky-ish bottom list item) -->
+                <div
+                    class="flex items-center bg-biru-gelap border-2 border-biru-gelap rounded-xl p-3 shadow-[0_4px_0px_0px_rgba(199,34,34,1)] mt-2">
+                    <div class="font-headline-sm text-headline-sm text-biru-muda w-8 text-center">42</div>
+                    <div
+                        class="w-10 h-10 rounded-full overflow-hidden border-2 border-biru-muda mr-3 bg-surface-variant">
+                        <img alt="Current User" class="w-full h-full object-cover"
+                            data-alt="Close up portrait of a young athletic woman with a confident expression, soft natural lighting, outdoor setting hinting at a run, vibrant colors with deep red and deep blue accents aligning with LARI brand."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx7dDVNJ0MfAs6xTLs58Rc-gY98LDP_J_m6NcpD6XE6SZY2gbsXFlkbHPpcBVFCFne64K6_-DwZnNemncw9PcXFkajbKZwNAxgMR_aGKnZb1w6j2nVbh6v1mSueuCYJm4mF-rUJOS1lqvJncgk9KS3AtU6buoLb3OVfcwiqaAdEDX8AcbORwUpMyu_1KnygeGCGJMhu1DM1g_vzCEI_XGscMnsnWDzKat3B38GutEFW167Q-Cr7fLXSfcf-yU8xmZAhiV8R-PkLCZh" />
+                    </div>
+                    <div class="flex-grow">
+                        <div class="font-label-md text-label-md text-on-primary">You</div>
+                        <div class="font-label-sm text-label-sm text-biru-muda flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]"
+                                data-icon="trending_up">trending_up</span> Moving up!
+                        </div>
+                    </div>
+                    <div
+                        class="font-headline-sm text-headline-sm text-merah bg-surface-container-lowest px-2 py-1 rounded-lg border-2 border-merah">
+                        12<span class="text-label-sm">km</span></div>
+                </div>
+            </div>
+        </main>
+        <!-- BottomNavBar -->
+        <nav
+            class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 bg-surface dark:bg-inverse-surface h-20 pb-safe md:absolute border-t-2 border-biru-gelap dark:border-silver-white shadow-[0_-4px_0px_0px_rgba(44,90,100,0.1)]">
+            <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+                <span class="font-label-sm text-label-sm">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined mb-1" data-icon="history">history</span>
+                <span class="font-label-sm text-label-sm">History</span>
+            </a>
+            <a class="flex flex-col items-center justify-center bg-merah text-on-primary rounded-lg border-2 border-biru-gelap px-4 py-1 active:translate-y-1 transition-all duration-75 min-w-16 h-14"
+                href="#">
+                <span class="material-symbols-outlined mb-1" data-icon="leaderboard" data-weight="fill"
+                    style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+                <span class="font-label-sm text-label-sm">Leaderboard</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+                <span class="font-label-sm text-label-sm">Profile</span>
+            </a>
+        </nav>
+    </div>
+</body>
+
+</html>

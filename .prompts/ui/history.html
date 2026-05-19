@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>LARI - History</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Soft Brutalist shadow utility based on Biru Gelap */
+        .brutalist-shadow {
+            box-shadow: 4px 4px 0px 0px #2C5A64;
+        }
+
+        .brutalist-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #2C5A64;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-silver-white text-on-surface antialiased min-h-screen flex flex-col mx-auto max-w-md w-full relative">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface border-b-2 border-biru-gelap max-w-md mx-auto right-0">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-biru-muda border-2 border-biru-gelap overflow-hidden flex-shrink-0">
+                <img alt="User profile" class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtOMu69WopeHQSCALqVWzFRkwV_FlCvNRO2wwqwXrU20pMLEwIlZL-r1Vdf7vogN63DCtZ02HXBxHkKuiu6h8o_TUKTrlqhMNwE72Za-DxwWnacaXKDUaPg-OJDaW4p9bnW_YCZ9zvwCFTUF-r6UNCJk45-IMoM0MbrW3saJFFFLuhmHh7wR8mMF5BvcpQaWQBdAh9v_nO5j1SRL9HW8QxVBhQYarUSSXQpZwUEK0Q5IB77BXYFy12k1_nok5naIx8sKn7euk9-Rov" />
+            </div>
+        </div>
+        <h1 class="font-headline-md text-headline-md font-black tracking-tighter text-merah italic">LARI</h1>
+        <button aria-label="Notifications"
+            class="w-10 h-10 flex items-center justify-center text-merah hover:bg-surface-variant transition-colors rounded-full active:scale-95 transition-transform">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+    </header>
+    <!-- Main Canvas -->
+    <main class="flex-grow pt-20 pb-28 px-margin-mobile flex flex-col gap-6">
+        <!-- Header Section -->
+        <div class="flex justify-between items-end">
+            <div>
+                <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-biru-gelap">Run History</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Your recent achievements.</p>
+            </div>
+            <div class="flex gap-2 mb-1">
+                <button class="font-label-sm text-label-sm px-3 py-1 bg-biru-gelap text-on-primary rounded-full">All
+                    Time</button>
+            </div>
+        </div>
+        <!-- History List -->
+        <div class="flex flex-col gap-4">
+            <!-- Run Card 1 -->
+            <article
+                class="bg-surface-container-lowest border-2 border-biru-gelap rounded-lg p-4 brutalist-shadow flex flex-col gap-3 relative cursor-pointer active:translate-y-1 active:shadow-none transition-all">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-merah">directions_run</span>
+                        <span class="font-label-md text-label-md text-biru-gelap">Morning 5K Loop</span>
+                    </div>
+                    <span
+                        class="font-label-sm text-label-sm bg-surface-container border border-biru-gelap text-biru-gelap px-2 py-0.5 rounded-sm">DB</span>
+                </div>
+                <div class="flex items-end gap-1">
+                    <span class="font-headline-xl text-headline-xl text-merah leading-none">5.2</span>
+                    <span class="font-body-md text-body-md text-on-surface-variant pb-1">km</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-surface-variant">
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time</p>
+                        <p class="font-headline-sm text-headline-sm text-biru-gelap">28:45</p>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Avg Pace
+                        </p>
+                        <p class="font-headline-sm text-headline-sm text-biru-gelap">5'31"</p>
+                    </div>
+                </div>
+                <div class="absolute bottom-4 right-4 text-biru-gelap opacity-30">
+                    <span class="material-symbols-outlined">arrow_forward_ios</span>
+                </div>
+            </article>
+            <!-- Run Card 2 (With Map Preview) -->
+            <article
+                class="bg-surface-container-lowest border-2 border-biru-gelap rounded-lg overflow-hidden brutalist-shadow flex flex-col relative cursor-pointer active:translate-y-1 active:shadow-none transition-all">
+                <div class="h-24 bg-biru-muda w-full border-b-2 border-biru-gelap relative bg-cover bg-center"
+                    data-alt="A stylized digital map view from above, showing winding red routes layered over a minimalist, flat-color representation of city streets and green parks. The map uses a light, modern palette with the primary route highlighted in a thick, vibrant red line against soft blues and whites."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKL_BevO6RngpMmG8J98PCW4sm_3kds9udb5dLTtTAwTvgJ3AYzKabAdhAUJs3dtSmcLIIANq_Wr06NCDJ-zx95a7x_b-5JYQtVpjM0RdFrzFVBYanjSW6eP-PR9PhiIfnHwiAVfJWfy2V05tWqXSwb4nR01pAg01Cmfe9ocWbEyZGuje4_JtBhOR75ZaL_JE-dGsyNbRvVg85bLsbPMyOO6XTdUZ7qsWJJNfk77RnN_KK5-SP1zSvWaueTLWC4H8GSpK-1Zx2L3ok');">
+                    <!-- Map Placeholder / Overlay -->
+                    <div class="absolute inset-0 bg-surface/20"></div>
+                </div>
+                <div class="p-4 flex flex-col gap-3">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-merah">terrain</span>
+                            <span class="font-label-md text-label-md text-biru-gelap">Trail Sprint</span>
+                        </div>
+                        <span
+                            class="font-label-sm text-label-sm bg-merah text-on-primary border border-biru-gelap px-2 py-0.5 rounded-sm">LOCAL</span>
+                    </div>
+                    <div class="flex items-end gap-1">
+                        <span class="font-headline-xl text-headline-xl text-merah leading-none">10.0</span>
+                        <span class="font-body-md text-body-md text-on-surface-variant pb-1">km</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-surface-variant">
+                        <div>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time
+                            </p>
+                            <p class="font-headline-sm text-headline-sm text-biru-gelap">58:12</p>
+                        </div>
+                        <div>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Avg
+                                Pace</p>
+                            <p class="font-headline-sm text-headline-sm text-biru-gelap">5'49"</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!-- Run Card 3 -->
+            <article
+                class="bg-surface-container-lowest border-2 border-biru-gelap rounded-lg p-4 brutalist-shadow flex flex-col gap-3 relative cursor-pointer active:translate-y-1 active:shadow-none transition-all">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-merah">directions_run</span>
+                        <span class="font-label-md text-label-md text-biru-gelap">Evening Recovery</span>
+                    </div>
+                    <span
+                        class="font-label-sm text-label-sm bg-surface-container border border-biru-gelap text-biru-gelap px-2 py-0.5 rounded-sm">DB</span>
+                </div>
+                <div class="flex items-end gap-1">
+                    <span class="font-headline-xl text-headline-xl text-merah leading-none">3.5</span>
+                    <span class="font-body-md text-body-md text-on-surface-variant pb-1">km</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-surface-variant">
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time</p>
+                        <p class="font-headline-sm text-headline-sm text-biru-gelap">24:30</p>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Avg Pace
+                        </p>
+                        <p class="font-headline-sm text-headline-sm text-biru-gelap">7'00"</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 bg-surface h-20 pb-safe border-t-2 border-biru-gelap shadow-[0_-4px_0px_0px_rgba(44,90,100,0.1)] max-w-md mx-auto right-0">
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">home</span>
+            <span class="font-label-sm text-label-sm">Home</span>
+        </button>
+        <button
+            class="flex flex-col items-center justify-center bg-merah text-on-primary rounded-lg border-2 border-biru-gelap px-4 py-1 hover:bg-biru-muda/20 transition-colors h-14 active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+            <span class="font-label-sm text-label-sm">History</span>
+        </button>
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">leaderboard</span>
+            <span class="font-label-sm text-label-sm">Leaderboard</span>
+        </button>
+        <button
+            class="flex flex-col items-center justify-center text-biru-gelap opacity-70 hover:bg-biru-muda/20 transition-colors w-16 h-14 rounded-lg active:translate-y-1 transition-all duration-75">
+            <span class="material-symbols-outlined mb-1">person</span>
+            <span class="font-label-sm text-label-sm">Profile</span>
+        </button>
+    </nav>
+</body>
+
+</html>

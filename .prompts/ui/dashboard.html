@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>LARI - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Prevent overscroll bounce on mobile */
+            overscroll-behavior-y: none;
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .soft-brutalism-card {
+            border: 2px solid #2C5A64;
+            /* Biru Gelap */
+            box-shadow: 4px 4px 0px 0px #2C5A64;
+        }
+
+        .soft-brutalism-btn {
+            border: 2px solid #2C5A64;
+            box-shadow: 0px 6px 0px 0px #2C5A64;
+            transform: translateY(0);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .soft-brutalism-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0px 0px 0px 0px #2C5A64;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-silver-white text-on-surface font-body-md h-screen flex flex-col relative md:hidden overflow-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface dark:bg-inverse-surface border-b-2 border-biru-gelap dark:border-silver-white">
+        <div class="flex items-center gap-3 active:scale-95 transition-transform">
+            <div class="w-10 h-10 rounded-full border-2 border-biru-gelap overflow-hidden bg-biru-muda flex-shrink-0">
+                <img alt="User profile picture" class="w-full h-full object-cover"
+                    data-alt="A close-up portrait of an active young woman with a slight smile. The lighting is bright and outdoorsy, reflecting a modern, energetic lifestyle. Her face is clearly visible, illuminated by natural sunlight against a subtle, out-of-focus urban background. The overall aesthetic feels fresh, active, and clean."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUeLDbNo5N1DWr1zgnfr6lq6nH38NQN4a6n-BakRP-Vk9ax_YUTSEj8XdDGOgNCyw12LAZdIol0rjD6_gjUgstTBUTONp-f5xErbcBnYu-rFGAtiLm9BsdzkMej0TM7mQmVPwxBQ8aCxRxJgqphtomAo_vjlUFkG97gZMZ5ntNPJzK_Z_ypRYQ5BpHM54WeM9RF0PFFoVPpayb5yldrej0Meawyl87alhla8EjSCwZgfsD4Ti8wF_H1IjmuHaCogtEuZWRUdKalr3J" />
+            </div>
+            <span class="font-headline-md text-headline-md font-black tracking-tighter text-merah italic">LARI</span>
+        </div>
+        <button
+            class="w-10 h-10 flex items-center justify-center rounded-full text-merah dark:text-inverse-primary hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors active:scale-95">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+        </button>
+    </header>
+    <!-- Main Content Area -->
+    <main class="flex-1 mt-16 mb-20 relative flex flex-col w-full h-full">
+        <!-- Map Canvas (Background) -->
+        <div
+            class="absolute inset-0 w-full h-full z-0 bg-surface-container-high overflow-hidden border-b-2 border-biru-gelap">
+            <!-- Simulated Map using CSS gradient to represent Biru Muda routes and Biru Gelap accents -->
+            <div class="w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#8CC7C4_0%,_#E0E0E0_70%)] relative opacity-80"
+                data-location="Jakarta" style="">
+                <!-- Decorative Map Elements -->
+                <svg class="absolute inset-0 opacity-40" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 50 150 Q 150 50, 250 200 T 400 300" fill="transparent" stroke="#2C5A64"
+                        stroke-dasharray="8 8" stroke-width="4"></path>
+                    <circle cx="250" cy="200" fill="#C72222" r="8" stroke="#2C5A64" stroke-width="2"></circle>
+                    <circle cx="50" cy="150" fill="#f9f9f9" r="6" stroke="#2C5A64" stroke-width="2"></circle>
+                </svg>
+            </div>
+        </div>
+        <!-- Dashboard Overlay Content -->
+        <div class="relative z-10 p-margin-mobile flex flex-col h-full pointer-events-none">
+            <!-- Quick Stats Bento Grid -->
+            <div class="grid grid-cols-2 gap-unit pointer-events-auto">
+                <!-- Stat Card 1 -->
+                <div class="bg-surface rounded-lg p-3 soft-brutalism-card flex flex-col justify-between h-24">
+                    <div class="flex items-center gap-1 text-biru-gelap">
+                        <span class="material-symbols-outlined text-[18px]">directions_run</span>
+                        <span class="font-label-sm text-label-sm uppercase">Weekly</span>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">24.5</span>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">km</span>
+                    </div>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="bg-surface rounded-lg p-3 soft-brutalism-card flex flex-col justify-between h-24">
+                    <div class="flex items-center gap-1 text-biru-gelap">
+                        <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+                        <span class="font-label-sm text-label-sm uppercase">Calories</span>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">1,420</span>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">kcal</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Spacer to push Floating Button down -->
+            <div class="flex-grow"></div>
+            <!-- Floating Start Action -->
+            <div class="w-full flex justify-center pb-8 pointer-events-auto">
+                <button
+                    class="w-32 h-32 rounded-full bg-merah text-on-primary soft-brutalism-btn flex flex-col items-center justify-center gap-1 group">
+                    <span
+                        class="material-symbols-outlined text-[48px] group-hover:scale-110 transition-transform duration-200"
+                        style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    <span class="font-headline-sm text-headline-sm tracking-wide">MULAI</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 bg-surface dark:bg-inverse-surface h-20 pb-safe border-t-2 border-biru-gelap dark:border-silver-white shadow-[0_-4px_0px_0px_rgba(44,90,100,0.1)]">
+        <!-- Home (Active) -->
+        <a class="flex flex-col items-center justify-center bg-merah text-on-primary rounded-lg border-2 border-biru-gelap px-4 py-1 active:translate-y-1 transition-all duration-75"
+            href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+            <span class="font-label-sm text-label-sm">Home</span>
+        </a>
+        <!-- History -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors px-4 py-1 rounded-lg active:translate-y-1"
+            href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">history</span>
+            <span class="font-label-sm text-label-sm mt-1">History</span>
+        </a>
+        <!-- Leaderboard -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors px-4 py-1 rounded-lg active:translate-y-1"
+            href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">leaderboard</span>
+            <span class="font-label-sm text-label-sm mt-1">Leaderboard</span>
+        </a>
+        <!-- Profile -->
+        <a class="flex flex-col items-center justify-center text-biru-gelap dark:text-silver-white opacity-70 hover:bg-biru-muda/20 transition-colors px-4 py-1 rounded-lg active:translate-y-1"
+            href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+            <span class="font-label-sm text-label-sm mt-1">Profile</span>
+        </a>
+    </nav>
+</body>
+
+</html>

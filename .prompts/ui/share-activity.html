@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>LARI Sharing View</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "merah": "#C72222",
+                        "surface-tint": "#bb171b",
+                        "on-surface": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#b9e7f3",
+                        "on-tertiary-container": "#b5f1ee",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#35706e",
+                        "outline": "#906f6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#1d4d57",
+                        "secondary-fixed-dim": "#a0ceda",
+                        "on-secondary-fixed": "#001f25",
+                        "primary-fixed": "#ffdad6",
+                        "biru-muda": "#8CC7C4",
+                        "tertiary-fixed-dim": "#96d1ce",
+                        "on-primary-fixed-variant": "#93000c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#185856",
+                        "on-tertiary-fixed-variant": "#0a4f4d",
+                        "primary-container": "#c72222",
+                        "outline-variant": "#e4beb9",
+                        "secondary": "#37656f",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffdeda",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-fixed": "#00201f",
+                        "tertiary-fixed": "#b2eeea",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "silver-white": "#E0E0E0",
+                        "background": "#f9f9f9",
+                        "primary": "#a2000e",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "biru-gelap": "#2C5A64",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bceaf6",
+                        "on-secondary-container": "#3c6973",
+                        "surface-container-low": "#f4f3f3",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#5b403d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Simulating 18:9 aspect ratio for sharing view preview */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #333;
+            /* Dark background to highlight the mobile frame */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 400px;
+            /* ~ mobile width */
+            aspect-ratio: 9 / 18;
+            /* 18:9 ratio */
+            background-color: #f9f9f9;
+            /* background */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 2rem;
+            /* physical phone simulation */
+            border: 8px solid #222;
+        }
+
+        /* Hide scrollbar for clean sharing view */
+        .mobile-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="antialiased font-body-lg">
+    <!-- Mobile Frame Simulation for "Export View" -->
+    <div class="mobile-container flex flex-col bg-silver-white">
+        <!-- Background Pattern / Noise -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(#2C5A64 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <!-- Sharing Card Content -->
+        <main class="flex-1 flex flex-col p-margin-mobile relative z-10 overflow-hidden pt-12 pb-8">
+            <!-- Branding Header -->
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h1
+                        class="font-headline-xl text-headline-xl text-merah font-black tracking-tighter italic m-0 p-0 leading-none">
+                        LARI</h1>
+                    <p class="font-label-sm text-label-sm text-biru-gelap uppercase tracking-widest mt-1 opacity-80">
+                        Morning Run</p>
+                </div>
+                <div
+                    class="bg-biru-gelap text-on-primary font-label-md text-label-md px-3 py-1 rounded-full border-2 border-biru-gelap shadow-[2px_2px_0px_0px_#8CC7C4]">
+                    24 Oct, 2023
+                </div>
+            </div>
+            <!-- Map Area (Hero) -->
+            <div
+                class="relative w-full flex-1 rounded-xl border-2 border-biru-gelap overflow-hidden mb-6 bg-surface-container-low shadow-[4px_4px_0px_0px_rgba(44,90,100,1)] z-10 flex flex-col">
+                <img alt="Map View" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply"
+                    data-alt="A stylized digital map view from a top-down perspective, showing a running route highlighted in bright red. The map has a modern, clean aesthetic using soft gray and white tones for streets and buildings, with vibrant teal (#8CC7C4) accents for water bodies or parks. The visual style is crisp and geometric, suited for an energetic fitness tracking application."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuACEt3tTnb0hDYcP-8MvzUQ1GXH2EBpvaAD858c2WCgEM2_CSBv6arlTLUwhqD-WQf90W19BLcklvI576DSpIsEWdqNvbOCDiRTKxnlpFIyVbhV5pzR8DWilCzQGf37s7c9FKNuqYeB70qVCG8Dmgnk4F6NL3tci9dtyU0gRAKvyNLdoPosQmZ0M3e211YHYQLppBqtameAkeEmLslUfjwY4W8nkyl_d28YnpVYnLpok3OHvRWi4ZK9d2T4nCe2ayQJnR4EZK975lfP" />
+                <!-- Overlay Gradient for better text legibility at bottom of map if needed, or just let map shine -->
+                <div class="absolute inset-0 bg-gradient-to-t from-silver-white/50 to-transparent pointer-events-none">
+                </div>
+                <!-- Faux Route Line -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-md"
+                    preserveaspectratio="none" viewbox="0 0 100 100">
+                    <path class="opacity-90" d="M 20,80 C 40,60 30,30 50,40 S 70,20 80,10" fill="none" stroke="#C72222"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+                    <circle cx="20" cy="80" fill="#2C5A64" r="4"></circle>
+                    <circle cx="80" cy="10" fill="#C72222" r="4"></circle>
+                </svg>
+            </div>
+            <!-- Stats Bento Grid -->
+            <div class="grid grid-cols-2 gap-unit mb-6 z-10">
+                <!-- Main Stat: Distance -->
+                <div
+                    class="col-span-2 bg-on-primary border-2 border-biru-gelap rounded-lg p-4 shadow-[3px_3px_0px_0px_rgba(44,90,100,0.2)] flex items-end justify-between">
+                    <div>
+                        <p class="font-label-sm text-label-sm text-biru-gelap opacity-70 mb-1">DISTANCE</p>
+                        <div class="flex items-baseline gap-1">
+                            <span
+                                class="font-headline-xl text-headline-xl text-on-surface font-black tracking-tight leading-none">5.42</span>
+                            <span class="font-headline-sm text-headline-sm text-merah font-bold">km</span>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-merah text-4xl opacity-20">route</span>
+                </div>
+                <!-- Sub Stat: Pace -->
+                <div
+                    class="bg-on-primary border-2 border-biru-gelap rounded-lg p-4 shadow-[2px_2px_0px_0px_rgba(44,90,100,0.2)] flex flex-col justify-between h-24">
+                    <p class="font-label-sm text-label-sm text-biru-gelap opacity-70">AVG PACE</p>
+                    <div class="flex items-baseline gap-1">
+                        <span
+                            class="font-headline-md text-headline-md text-on-surface font-bold leading-none">5'30"</span>
+                        <span class="font-label-sm text-label-sm text-biru-gelap">/km</span>
+                    </div>
+                </div>
+                <!-- Sub Stat: Time -->
+                <div
+                    class="bg-on-primary border-2 border-biru-gelap rounded-lg p-4 shadow-[2px_2px_0px_0px_rgba(44,90,100,0.2)] flex flex-col justify-between h-24">
+                    <p class="font-label-sm text-label-sm text-biru-gelap opacity-70">TIME</p>
+                    <div class="flex items-baseline gap-1">
+                        <span
+                            class="font-headline-md text-headline-md text-on-surface font-bold leading-none">29:48</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer / Runner Info -->
+            <div class="flex items-center gap-3 mt-auto pt-4 border-t-2 border-biru-gelap/20 z-10">
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-biru-gelap overflow-hidden flex-shrink-0 bg-surface-container-high">
+                    <img alt="Runner Avatar" class="w-full h-full object-cover"
+                        data-alt="A small, circular profile portrait of a young athlete with a neutral expression, outdoors in soft natural daylight. The image has high contrast and saturation, fitting a vibrant UI design style."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd0qz-lg8Rth9v2DvyqhMM4WjUmdR1-awwYqUy9fy2so3yFenTp4E0uYbfs4AfR5FnVYRaaTN1erKN9Y3SkFSzaXcedZWN0o_P0Ruk6rR0Vlk-UB3ZG13O5pGRhADgIREAlwtbY8NvBtr6K3jBQm9cMGkWH-824oTmAs745epdVsBjk9_NIOGib6IDRfEwIIIVWpsoH-XpkSE-q3r7v7S0toLNZoaAkLJk8w82DCRRlSXa8ssClSNI3TnnpqfxUSokv0zckvqDdOQG" />
+                </div>
+                <div>
+                    <p class="font-label-md text-label-md text-on-surface">Alex Runner</p>
+                    <p class="font-label-sm text-label-sm text-merah flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+                        3 Day Streak
+                    </p>
+                </div>
+            </div>
+        </main>
+        <!-- Watermark / Decorative element bottom right -->
+        <div
+            class="absolute -bottom-10 -right-10 w-40 h-40 bg-merah rounded-full opacity-10 blur-2xl pointer-events-none">
+        </div>
+    </div>
+</body>
+
+</html>
