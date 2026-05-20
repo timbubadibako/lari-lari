@@ -1,27 +1,42 @@
 import { create } from 'zustand';
+import distance from '@turf/distance';
+import { point } from '@turf/helpers';
+
+interface Profile {
+  username: string;
+  display_name: string;
+  level: number;
+  xp: number;
+  territory_count: number;
+}
 
 interface RunState {
   isTracking: boolean;
-  elapsedTime: number; // in seconds
-  distance: number; // in km
-  pace: number; // minutes per km
+  elapsedTime: number; 
+  distance: number; 
+  pace: number; 
   calories: number;
-  route: [number, number][]; // Array of [longitude, latitude]
+  route: [number, number][]; 
+  profile: Profile | null;
   
   // Actions
+  setProfile: (profile: Profile) => void;
   startTracking: () => void;
   stopTracking: () => void;
-  updateTick: () => void; // Called every second when tracking
+  updateTick: () => void;
   addRoutePoint: (coord: [number, number]) => void;
 }
 
-export const useRunStore = create<RunState>((set) => ({
+export const useRunStore = create<RunState>((set, get) => ({
   isTracking: false,
   elapsedTime: 0,
   distance: 0,
   pace: 0,
   calories: 0,
   route: [],
+  profile: null,
+
+  setProfile: (profile) => set({ profile }),
 
   startTracking: () => set({ 
     isTracking: true, 
@@ -34,23 +49,34 @@ export const useRunStore = create<RunState>((set) => ({
   
   stopTracking: () => set({ isTracking: false }),
   
-  updateTick: () => set((state) => {
-    const newTime = state.elapsedTime + 1;
-    // Mocking distance and calories for now (will be replaced by real GPS calculation)
-    // Assuming a pace of ~6:00 min/km for demonstration (approx 2.7 meters per second)
-    const newDistance = state.distance + (0.0027); 
-    const newCalories = state.calories + (0.15);
-    const newPace = newDistance > 0 ? (newTime / 60) / newDistance : 0;
+  updateTick: () => set((state) => ({
+    elapsedTime: state.elapsedTime + 1,
+  })),
+
+  addRoutePoint: (newCoord) => set((state) => {
+    const lastCoord = state.route[state.route.length - 1];
+    let addedDistance = 0;
+
+    if (lastCoord) {
+      // Calculate real distance using Turf (in kilometers)
+      const from = point(lastCoord);
+      const to = point(newCoord);
+      addedDistance = distance(from, to, { units: 'kilometers' });
+      
+      // Ignore jitter (movements less than 2 meters)
+      if (addedDistance < 0.002) addedDistance = 0;
+    }
+
+    const newDistance = state.distance + addedDistance;
+    const newPace = newDistance > 0 ? (state.elapsedTime / 60) / newDistance : 0;
+    // Roughly 60 kcal per km
+    const newCalories = newDistance * 60;
 
     return {
-      elapsedTime: newTime,
+      route: [...state.route, newCoord],
       distance: newDistance,
-      calories: newCalories,
       pace: newPace,
+      calories: newCalories,
     };
   }),
-
-  addRoutePoint: (coord) => set((state) => ({
-    route: [...state.route, coord]
-  })),
 }));

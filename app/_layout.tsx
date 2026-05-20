@@ -12,11 +12,42 @@ export const unstable_settings = {
   initialRouteName: 'index',
 };
 
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { useRouter, useSegments } from 'expo-router';
+
 export default function RootLayout() {
+  const [session, setSession] = useState<any>(null);
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  useEffect(() => {
+    const inAuthGroup = segments[0] === 'auth';
+
+    if (!session && !inAuthGroup) {
+      // Redirect to login if not logged in
+      router.replace('/auth');
+    } else if (session && inAuthGroup) {
+      // Redirect to home if logged in and trying to access auth
+      router.replace('/');
+    }
+  }, [session, segments]);
+
   return (
     <ThemeProvider>
       <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
         <Stack.Screen name="index" />
+        <Stack.Screen name="auth" />
         <Stack.Screen name="history/index" />
         <Stack.Screen name="regu/index" />
         <Stack.Screen name="profile/index" />
