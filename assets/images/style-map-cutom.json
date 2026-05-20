@@ -1647,7 +1647,7 @@
                 "line-join": "round"
             },
             "paint": {
-                "line-color": "#ffffff",
+                "line-color": "#FFD700fff",
                 "line-width": {
                     "base": 1.3,
                     "stops": [
@@ -2608,7 +2608,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2665,7 +2665,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2722,7 +2722,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2783,7 +2783,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2848,7 +2848,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2913,7 +2913,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -2982,7 +2982,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -3061,7 +3061,7 @@
                 "line-join": "round"
             },
             "paint": {
-                "line-color": "#ffffff",
+                "line-color": "#FFD700fff",
                 "line-width": {
                     "base": 1.3,
                     "stops": [
@@ -3831,7 +3831,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -3897,7 +3897,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -3964,7 +3964,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -4034,7 +4034,7 @@
                     ]
                 },
                 "line-opacity": 1,
-                "line-color": "#fff"
+                "line-color": "#FFD700"
             }
         },
         {
@@ -5638,7 +5638,7 @@
             },
             "paint": {
                 "text-color": "#838383",
-                "text-halo-color": "#fff",
+                "text-halo-color": "#FFD700",
                 "text-halo-width": 1
             }
         },
@@ -5691,7 +5691,7 @@
             },
             "paint": {
                 "text-color": "#838383",
-                "text-halo-color": "#fff",
+                "text-halo-color": "#FFD700",
                 "text-halo-width": 1
             }
         },
@@ -5770,7 +5770,7 @@
             },
             "paint": {
                 "text-color": "#838383",
-                "text-halo-color": "#fff",
+                "text-halo-color": "#FFD700",
                 "text-halo-width": 1
             }
         },
@@ -5850,7 +5850,7 @@
             },
             "paint": {
                 "text-color": "#838383",
-                "text-halo-color": "#fff",
+                "text-halo-color": "#FFD700",
                 "text-halo-width": 1
             }
         },
