@@ -8,6 +8,14 @@
 * **Storage:** Expo SecureStore untuk kredensial sensitif.
 
 ## 2. Core Algorithm Specification
+### GPS Tracking & Data Optimization (Client-Side)
+*   **Pure Geometry Approach:** Peta tidak bergantung pada API Map Matching eksternal berbayar. Ini memungkinkan pengguna "membuka rute" di luar jalan raya (misal: lapangan rumput, taman, gang kecil) dengan murni mengandalkan data koordinat GPS yang terekam.
+*   **Douglas-Peucker Smoothing:** Menggunakan `@turf/simplify` secara real-time untuk membuang getaran sinyal (GPS jitter). Ini memastikan garis lari di peta tetap tajam, tegas, dan lurus tanpa terlihat kaku atau zigzag tak wajar.
+*   **Chain-Code Angle Detection (Key Node Extraction):** Algoritma efisiensi memori tingkat tinggi. Sistem menghitung *bearing* (derajat arah mata angin) menggunakan `@turf/bearing` antara titik A, B, dan C. 
+    *   Jika sudut lari konstan (lari lurus), koordinat tengah dibuang.
+    *   Jika ada perubahan sudut tajam (user berbelok), titik tersebut dikunci (disimpan) sebagai *Inflection Point*. 
+    *   Hasilnya: Beban penyimpanan di Supabase berkurang drastis hingga 90% (hanya menyimpan titik-titik sudut dari poligon).
+
 ### Territory Capture (Closed-Loop Gamification)
 *   **Path Tracking:** Menggunakan `expo-location` untuk merekam array of `[longitude, latitude]`.
 *   **Multi-day Continuation:** Path yang belum menjadi *closed loop* akan disimpan di database (Supabase) dengan status `pending`. User dapat melanjutkannya keesokan harinya dari titik terakhir.

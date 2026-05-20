@@ -10,6 +10,13 @@ interface Profile {
   territory_count: number;
 }
 
+interface Territory {
+  id: string;
+  name: string;
+  boundary: any; // GeoJSON Polygon
+  leader_id: string | null;
+}
+
 interface RunState {
   isTracking: boolean;
   elapsedTime: number; 
@@ -18,9 +25,11 @@ interface RunState {
   calories: number;
   route: [number, number][]; 
   profile: Profile | null;
+  territories: Territory[];
   
   // Actions
   setProfile: (profile: Profile) => void;
+  setTerritories: (territories: Territory[]) => void;
   startTracking: () => void;
   stopTracking: () => void;
   updateTick: () => void;
@@ -35,8 +44,10 @@ export const useRunStore = create<RunState>((set, get) => ({
   calories: 0,
   route: [],
   profile: null,
+  territories: [],
 
   setProfile: (profile) => set({ profile }),
+  setTerritories: (territories) => set({ territories }),
 
   startTracking: () => set({ 
     isTracking: true, 

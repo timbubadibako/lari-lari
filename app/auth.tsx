@@ -18,7 +18,7 @@ export default function AuthScreen() {
   async function handleAuth() {
     setLoading(true);
     if (isRegister) {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -28,8 +28,17 @@ export default function AuthScreen() {
           },
         },
       });
-      if (error) Alert.alert('Gagal Daftar', error.message);
-      else Alert.alert('Sukses!', 'Silakan cek email untuk verifikasi.');
+      if (error) {
+        Alert.alert('Gagal Daftar', error.message);
+      } else {
+        // Since verification is disabled, user is likely logged in immediately
+        if (data.session) {
+          router.replace('/');
+        } else {
+          Alert.alert('Sukses!', 'Pendaftaran berhasil, silakan masuk.');
+          setIsRegister(false);
+        }
+      }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) Alert.alert('Gagal Masuk', error.message);

@@ -34,6 +34,8 @@ const {
   Marker,
   UserLocation,
   useCurrentPosition,
+  FillLayer,
+  LineLayer,
 } = MapLibre || {};
 
 // Fallback for when native modules are missing
@@ -545,5 +547,8 @@ export { LocationManager };
     MarkerLabel,
     MarkerPopup,
     useCurrentPosition,
-    useMap
+    useMap,
+    FillLayer,
+    LineLayer,
+    GeoJSONSource
   };

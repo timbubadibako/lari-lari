@@ -15,60 +15,51 @@ LARI adalah aplikasi mobile (iOS & Android) berbasis React Native dengan tujuan 
 ## **Core Features / Fitur Utama**
 
 1. **User Authentication & Profile**
-   - Daftar/masuk, simpan dan edit data user
-   - Profil publik dengan statistik, XP, jumlah lari, dll
+   - Daftar/masuk instant (tanpa verifikasi email untuk alur game yang cepat)
+   - Profil publik dengan statistik, XP, jumlah wilayah, dll
 
-2. **Workout/Run Tracker**
-   - Pelacakan lari berbasis GPS & maps real-time (start, pause, stop, finish)
-   - Tampilkan jarak, waktu, kecepatan, pace, kalori (algoritma perhitungan tersedia)
-   - Auto-save history run
+2. **Workout/Run Tracker (Pure Geometry GPS)**
+   - Pelacakan lari murni menggunakan koordinat GPS (tanpa Map Matching API luar)
+   - Tampilkan jarak (Turf.js Haversine), waktu, pace, kalori
+   - *Douglas-Peucker Smoothing* untuk menghilangkan GPS jitter secara real-time.
 
-3. **History & Progress**
-   - Rekap latihan sebelumnya (per run, per minggu/bulan)
-   - Statistik: total jarak, waktu, speed rata-rata, grafik kemajuan
+3. **Territory Capture (Closed-Loop Gameplay)**
+   - Pengguna mengklaim wilayah dengan berlari membentuk jalur tertutup (Closed Boundary).
+   - Rute dapat dilanjutkan di hari berikutnya (Multi-day runs).
+   - Wilayah akan dipotong otomatis mengikuti batas kecamatan (District Clipping).
 
-4. **Leaderboard & Gamification**
-   - Leaderboard harian/mingguan, statistik per user, XP, badge, pencapaian
-   - Posisi user di komunitas, challenge/event, peringkat per level
+4. **Leaderboard & Guild System**
+   - Leaderboard mingguan per kecamatan.
+   - Sistem Regu/Guild terkunci hingga pengguna mencapai Level 10.
 
-5. **Social & Sharing**
-   - Share hasil/achievement ke media sosial
-   - Bagikan statistik/kegiatan ke grup/komunitas lain
+5. **Theme & Aesthetics (Neobrutalism)**
+   - Tema *Neobrutalism* / Cartoonish Board Game. 
+   - UI menggunakan bayangan blok solid 3D (bukan blur), tombol *squircle*, dan warna kontras tinggi.
+   - Peta menggunakan gaya "Putih Tulang" (*Positron Light*) dengan bangunan disamarkan agar rute/wilayah pemain sangat menonjol.
 
-6. **Theme Switcher (Modern Minimalis ↔ Glassmorphism)**
-   - User dapat ganti tema antara minimalis (solid flat) atau glassmorphism (blur, transparan)
-   - Semua komponen UI support dua tema total
+6. **Dynamic Dashboard Widget**
+   - Panel informasi vertikal di kiri atas yang bisa di-toggle untuk menghemat ruang peta.
+   - Memisahkan status Level, Rank, Guild, dan Area.
 
-7. **Settings**
-   - Pengaturan notifikasi, bahasa, preferensi tema, keluar akun
-
-8. **DevTools/Debug (khusus dev/tim internal)**
-   - Simulasi GPS, debug panel, log aktivitas sistem
-
----
-
-## **Bonus Features**
-- Onboarding wizard untuk user baru
-- Push notification pengingat latihan
-- Area dominasi/lari (peta siapa paling aktif di area tertentu)
-- Export data
-- Support device wearable (fitur ke depan)
+7. **Settings & DevTools**
+   - Pengaturan profil dan keluar akun.
+   - Simulasi GPS, debug panel, log aktivitas sistem.
 
 ---
 
 ## **Tech Stack**
 
 ### **Front End**
-- **React Native** (Expo)
+- **React Native** (Expo SDK 54)
 - **TypeScript**
-- **shadcn/ui** (adaptif ke RN, experimental)
-- **Zustand** (state management) +/atau React Context
-- **TanStack Query** (data/cache management)
-- **@rnmapbox/maps (MapLibre)** (peta/GPS)
-- **dayjs** (waktu)
+- **NativeWind v4** (Tailwind CSS untuk React Native)
+- **Zustand** (State management)
+- **@maplibre/maplibre-react-native** (Peta/GPS engine)
+- **@turf/turf** (Geospatial logic: distance, bearing, simplify, polygon intersections)
 
 ### **Back End dan Storage**
-- **Supabase** (auth, database, real-time, statistik leaderboard, dsb.)
+- **Supabase** (Auth, PostgreSQL)
+- **PostGIS** (Menyimpan tipe data GEOMETRY LineString dan Polygon untuk rute lari)
 
 ### **Other / Utility**
 - **dotenv** (env config)
