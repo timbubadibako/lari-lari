@@ -9,6 +9,8 @@ import { PortalHost } from '@rn-primitives/portal';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { View, ActivityIndicator } from 'react-native';
+import { BottomNav } from '@/components/ui/bottom-nav';
+import { useRunStore } from '@/lib/store';
 
 export const unstable_settings = {
   initialRouteName: 'index',
@@ -20,15 +22,14 @@ export default function RootLayout() {
   const segments = useSegments();
   const router = useRouter();
   const navigationState = useRootNavigationState();
+  const { isHUDActive } = useRunStore();
 
   useEffect(() => {
-    // 1. Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setIsInitialized(true);
     });
 
-    // 2. Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
@@ -37,7 +38,6 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    // Wait until both session is checked AND navigation is ready
     if (!isInitialized || !navigationState?.key) return;
 
     const inAuthGroup = segments[0] === 'auth';
@@ -57,16 +57,22 @@ export default function RootLayout() {
     );
   }
 
+  // Hide BottomNav on Auth screen or when running HUD is active
+  const showBottomNav = session && segments[0] !== 'auth' && !isHUDActive;
+
   return (
     <ThemeProvider>
-      <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="auth" />
-        <Stack.Screen name="history/index" />
-        <Stack.Screen name="regu/index" />
-        <Stack.Screen name="profile/index" />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
+      <View className="flex-1 bg-slate-900">
+        <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="auth" />
+          <Stack.Screen name="history/index" />
+          <Stack.Screen name="territory/index" />
+          <Stack.Screen name="profile/index" />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        </Stack>
+        {showBottomNav && <BottomNav />}
+      </View>
       <PortalHost />
       <StatusBar style="auto" />
     </ThemeProvider>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf9f4;
+            color: #1b1c19;
+            margin: 0;
+            padding-bottom: 120px; /* Space for bottom nav */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            shadow-offset: 6px;
+        }
+        /* Custom scrollbar for brutalist look */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf9f4;
+            border-left: 2px solid #1b1c19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a2000e;
+            border: 2px solid #1b1c19;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e3e3de",
+                      "secondary-container": "#afebe7",
+                      "on-tertiary-fixed": "#001d33",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#0a4f4d",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#efeee9",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#5b403d",
+                      "surface": "#faf9f4",
+                      "inverse-on-surface": "#f2f1ec",
+                      "primary-fixed-dim": "#ffb4ab",
+                      "error": "#ba1a1a",
+                      "inverse-primary": "#ffb4ab",
+                      "on-secondary-fixed": "#00201f",
+                      "on-primary-fixed": "#410002",
+                      "primary": "#a2000e",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1b1c19",
+                      "background": "#faf9f4",
+                      "outline-variant": "#e4beb9",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#30312e",
+                      "surface-container-highest": "#e3e3de",
+                      "surface-container-low": "#f5f4ef",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#b2eeea",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#ffdad6",
+                      "tertiary-container": "#006baa",
+                      "surface-tint": "#bb171b",
+                      "primary-container": "#c72222",
+                      "tertiary-fixed": "#cfe5ff",
+                      "on-primary-container": "#ffdeda",
+                      "surface-bright": "#faf9f4",
+                      "outline": "#906f6c",
+                      "on-tertiary-container": "#d5e8ff",
+                      "on-primary-fixed-variant": "#93000c",
+                      "on-surface": "#1b1c19",
+                      "on-tertiary-fixed-variant": "#004a78",
+                      "surface-container-high": "#e9e8e3",
+                      "secondary-fixed-dim": "#96d1ce",
+                      "surface-dim": "#dbdad5",
+                      "tertiary": "#005284",
+                      "tertiary-fixed-dim": "#99cbff",
+                      "on-secondary-container": "#306c6a",
+                      "secondary": "#2b6765"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "shadow-offset": "6px",
+                      "gutter": "16px",
+                      "margin-mobile": "20px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-caps": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 flex justify-between items-center px-margin-mobile py-4 bg-surface border-b-2 border-on-background shadow-[6px_6px_0px_0px_rgba(27,28,25,1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">radar</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black tracking-tighter text-primary uppercase">LARI</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center border-2 border-on-background bg-surface hover:bg-surface-variant transition-colors active:translate-x-[2px] active:translate-y-[2px] active:shadow-none shadow-[4px_4px_0px_0px_rgba(27,28,25,1)]">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="px-margin-mobile py-8 space-y-8">
+<!-- Flight Logs Header Card -->
+<section class="bg-surface border-2 border-on-background p-6 shadow-[6px_6px_0px_0px_rgba(27,28,25,1)]">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-6">FLIGHT LOGS</h2>
+<!-- Neo-Brutalist Search Bar -->
+<div class="relative group">
+<div class="absolute inset-0 bg-on-background translate-x-[4px] translate-y-[4px]"></div>
+<div class="relative flex items-center bg-white border-2 border-on-background px-4 py-3 focus-within:translate-x-[2px] focus-within:translate-y-[2px] transition-transform">
+<span class="material-symbols-outlined mr-3 text-on-surface-variant">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-label-caps text-label-caps p-0 outline-none placeholder:text-on-surface-variant/50" placeholder="SEARCH SESSIONS..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Category Filter -->
+<nav class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="shrink-0 px-6 py-2 border-2 border-on-background font-label-caps text-label-caps bg-surface hover:bg-surface-variant transition-all active:scale-95">ALL</button>
+<button class="shrink-0 px-6 py-2 border-2 border-on-background font-label-caps text-label-caps bg-surface hover:bg-surface-variant transition-all active:scale-95">TODAY</button>
+<!-- Active Pill -->
+<button class="shrink-0 px-6 py-2 border-2 border-on-background font-label-caps text-label-caps bg-secondary-container text-on-secondary-container shadow-[4px_4px_0px_0px_rgba(27,28,25,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">THIS WEEK</button>
+<button class="shrink-0 px-6 py-2 border-2 border-on-background font-label-caps text-label-caps bg-surface hover:bg-surface-variant transition-all active:scale-95">THIS MONTH</button>
+</nav>
+<!-- Log List -->
+<div class="space-y-6">
+<!-- Log Entry 1 -->
+<div class="group relative bg-surface border-2 border-on-background p-4 shadow-[6px_6px_0px_0px_rgba(27,28,25,1)] transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none cursor-pointer">
+<div class="flex gap-4">
+<!-- Map Thumbnail -->
+<div class="w-24 h-24 bg-surface-variant border-2 border-on-background overflow-hidden shrink-0">
+<img alt="Map log" class="w-full h-full object-cover grayscale brightness-110 contrast-125" data-alt="A top-down satellite view of a Tokyo city block with a vibrant red GPS running path highlighted over the streets. The style is high-contrast with dark asphalt and bright neon-red accents, maintaining a neo-brutalist aesthetic with thick black borders and sharp geographic lines." data-location="Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYz0BVabeVRgscr7JzUgZm0b1h344lifxE8HLcyOzWm875O0bE6bs0wx1H7rl0COQrQBL3DoTzOTqsk7PlmlmVjDeFspKOpo_aNfiESjUdVu-8D3q9pPIqmYp_RcWfL8n-Tn4OYZ1BywhyYg3W-etZ5QEihqxljp4WeZ71N1iL_itULNClFIkxEM4qie4alC47_FdS1UtMN_dVnfU6vD46MsFNfrFcEe-6zrBRFdHcIxi67jp1g0mP4RG2lBr4rymKqCrg7w5nef7K"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MAY 19, 2026</span>
+<span class="material-symbols-outlined font-bold">chevron_right</span>
+</div>
+<div class="flex items-end gap-2 mt-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile leading-none">9.32</span>
+<span class="font-label-caps text-label-caps pb-1">KM</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="font-label-caps text-label-caps">01:14:02</span>
+</div>
+<div class="bg-secondary-container px-2 py-0.5 border-2 border-on-background">
+<span class="font-label-caps text-label-caps text-on-secondary-container">180 XP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="group relative bg-surface border-2 border-on-background p-4 shadow-[6px_6px_0px_0px_rgba(27,28,25,1)] transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none cursor-pointer">
+<div class="flex gap-4">
+<div class="w-24 h-24 bg-surface-variant border-2 border-on-background overflow-hidden shrink-0">
+<img alt="Map log" class="w-full h-full object-cover grayscale contrast-150" data-alt="A stylized urban map showing a complicated circular route through Berlin's Tiergarten park. The image uses a high-contrast black and white palette with a thick teal line representing the athlete's path, presented in a clean architectural drafting style with brutalist framing." data-location="Berlin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBfDLZl5rwC7O7cOFCPHHESYCUipodiy1FMfg687EWL6zbE3aRYBCrppjufoeF_w2DiYx1ISckSFRfTKGj1MfWttPEUS5bIZLT41DYmDsJ9Auc_JAYMpatQbFrgRngm7KmIqMDUqVWkJiTG5uVElE3D9zQHsTpnz9xuyHGTZWOGZDJAM75Pl7WLXOJ-_ehnmBgaOB2u1siCdBgkDm3E0xpuencNnud9U0By3qJWV4K-h7Ez-XPSQyPMJdUTpSYgzs39-ZtDLT_AwKw"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MAY 17, 2026</span>
+<span class="material-symbols-outlined font-bold">chevron_right</span>
+</div>
+<div class="flex items-end gap-2 mt-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile leading-none">12.05</span>
+<span class="font-label-caps text-label-caps pb-1">KM</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="font-label-caps text-label-caps">01:22:15</span>
+</div>
+<div class="bg-secondary-container px-2 py-0.5 border-2 border-on-background">
+<span class="font-label-caps text-label-caps text-on-secondary-container">250 XP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="group relative bg-surface border-2 border-on-background p-4 shadow-[6px_6px_0px_0px_rgba(27,28,25,1)] transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none cursor-pointer">
+<div class="flex gap-4">
+<div class="w-24 h-24 bg-surface-variant border-2 border-on-background overflow-hidden shrink-0">
+<img alt="Map log" class="w-full h-full object-cover grayscale contrast-125" data-alt="A stark, minimalist street map of lower Manhattan with a bold red zig-zag path cutting through the grid. The visual style is aggressive and modern, featuring deep shadows and heavy line weights consistent with urban performance tracking aesthetics and a vibrant red-on-off-white theme." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7O6a2xgDeS271pYuNDWhheC_UBAJDCsu3LG7Ji6KtezzRWHTtEIWDG1wcWVgjUmAfTcfOnzj7EcNnfPxLvqGoUrTcKLeGJX3al3ioQyLsNeJXSxR5wT6dRYzM05kOq9nV75SAYBkexynS0w0y5MU1ra7FlkSJ8pejryjIdwZKmjISFjA-xXuKMUKIpfmOVZm8cRbRwdKZg_y0bTGXz2UvTZ__JtSCFimKmvJ5OFD2cUsG6_IuuwkmjVkIAsuKR_3f_-DLMLUu7YPj"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MAY 15, 2026</span>
+<span class="material-symbols-outlined font-bold">chevron_right</span>
+</div>
+<div class="flex items-end gap-2 mt-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile leading-none">5.10</span>
+<span class="font-label-caps text-label-caps pb-1">KM</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="font-label-caps text-label-caps">00:34:50</span>
+</div>
+<div class="bg-secondary-container px-2 py-0.5 border-2 border-on-background">
+<span class="font-label-caps text-label-caps text-on-secondary-container">95 XP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-surface border-t-2 border-on-background">
+<!-- MAPS -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-label-caps text-label-caps">MAPS</span>
+</a>
+<!-- TERRITORY -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-label-caps text-label-caps">TERRITORY</span>
+</a>
+<!-- LOGS (Active) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim bg-secondary-container dark:bg-on-secondary-fixed-variant rounded-xl border-2 border-on-background py-1 px-4 shadow-[4px_4px_0px_0px_rgba(27,28,25,1)] active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-caps text-label-caps">LOGS</span>
+</a>
+<!-- PILOT -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-caps text-label-caps">PILOT</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.group.relative').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'translate(4px, 4px)';
+                card.style.boxShadow = 'none';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Filter button toggle logic
+        const filters = document.querySelectorAll('nav.flex button');
+        filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filters.forEach(b => {
+                    b.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'shadow-[4px_4px_0px_0px_rgba(27,28,25,1)]', 'active:translate-x-[2px]', 'active:translate-y-[2px]');
+                    b.classList.add('bg-surface', 'hover:bg-surface-variant');
+                });
+                btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'shadow-[4px_4px_0px_0px_rgba(27,28,25,1)]', 'active:translate-x-[2px]', 'active:translate-y-[2px]');
+                btn.classList.remove('bg-surface', 'hover:bg-surface-variant');
+            });
+        });
+    </script>
+</body></html>

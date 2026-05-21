@@ -74,43 +74,55 @@ export default function AuthScreen() {
               {isRegister && (
                 <View>
                   <Label className="mb-2 ml-1 font-bold text-biru-gelap">NAMA PILOT (USERNAME)</Label>
-                  <View className="flex-row items-center bg-slate-50 border-2 border-biru-gelap rounded-xl px-3">
-                    <UserIcon size={20} color="#2C5A64" />
-                    <Input 
-                      placeholder="Contoh: StreetRunner99"
-                      value={username}
-                      onChangeText={setUsername}
-                      className="flex-1 h-12 border-0 bg-transparent font-bold"
-                    />
+                  <View className="relative">
+                    <View className="absolute top-1 left-1 w-full h-12 bg-biru-gelap rounded-xl" />
+                    <View className="flex-row items-center bg-white border-2 border-biru-gelap rounded-xl px-3 h-12 overflow-hidden">
+                      <UserIcon size={20} color="#2C5A64" />
+                      <Input 
+                        placeholder="StreetRunner99"
+                        value={username}
+                        onChangeText={setUsername}
+                        placeholderTextColor="#94A3B8"
+                        className="flex-1 h-full bg-transparent font-bold text-slate-900 ml-1"
+                      />
+                    </View>
                   </View>
                 </View>
               )}
 
               <View>
                 <Label className="mb-2 ml-1 font-bold text-biru-gelap">EMAIL ENKRYPSI</Label>
-                <View className="flex-row items-center bg-slate-50 border-2 border-biru-gelap rounded-xl px-3">
-                  <Mail size={20} color="#2C5A64" />
-                  <Input 
-                    placeholder="nama@email.com"
-                    value={email}
-                    onChangeText={setEmail}
-                    autoCapitalize="none"
-                    className="flex-1 h-12 border-0 bg-transparent font-bold"
-                  />
+                <View className="relative">
+                  <View className="absolute top-1 left-1 w-full h-12 bg-biru-gelap rounded-xl" />
+                  <View className="flex-row items-center bg-white border-2 border-biru-gelap rounded-xl px-3 h-12 overflow-hidden">
+                    <Mail size={20} color="#2C5A64" />
+                    <Input 
+                      placeholder="nama@email.com"
+                      value={email}
+                      onChangeText={setEmail}
+                      autoCapitalize="none"
+                      placeholderTextColor="#94A3B8"
+                      className="flex-1 h-full bg-transparent font-bold text-slate-900 ml-1"
+                    />
+                  </View>
                 </View>
               </View>
 
               <View>
                 <Label className="mb-2 ml-1 font-bold text-biru-gelap">KODE AKSES (PASSWORD)</Label>
-                <View className="flex-row items-center bg-slate-50 border-2 border-biru-gelap rounded-xl px-3">
-                  <Lock size={20} color="#2C5A64" />
-                  <Input 
-                    placeholder="••••••••"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    className="flex-1 h-12 border-0 bg-transparent font-bold"
-                  />
+                <View className="relative">
+                  <View className="absolute top-1 left-1 w-full h-12 bg-biru-gelap rounded-xl" />
+                  <View className="flex-row items-center bg-white border-2 border-biru-gelap rounded-xl px-3 h-12 overflow-hidden">
+                    <Lock size={20} color="#2C5A64" />
+                    <Input 
+                      placeholder="••••••••"
+                      value={password}
+                      onChangeText={setPassword}
+                      secureTextEntry
+                      placeholderTextColor="#94A3B8"
+                      className="flex-1 h-full bg-transparent font-bold text-slate-900 ml-1"
+                    />
+                  </View>
                 </View>
               </View>
 

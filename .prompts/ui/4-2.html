@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e3de",
+                        "secondary-container": "#afebe7",
+                        "on-tertiary-fixed": "#001d33",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#0a4f4d",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5b403d",
+                        "surface": "#faf9f4",
+                        "inverse-on-surface": "#f2f1ec",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary-fixed": "#00201f",
+                        "on-primary-fixed": "#410002",
+                        "primary": "#a2000e",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c19",
+                        "background": "#faf9f4",
+                        "outline-variant": "#e4beb9",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "surface-container-highest": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#b2eeea",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary-container": "#006baa",
+                        "surface-tint": "#bb171b",
+                        "primary-container": "#c72222",
+                        "tertiary-fixed": "#cfe5ff",
+                        "on-primary-container": "#ffdeda",
+                        "surface-bright": "#faf9f4",
+                        "outline": "#906f6c",
+                        "on-tertiary-container": "#d5e8ff",
+                        "on-primary-fixed-variant": "#93000c",
+                        "on-surface": "#1b1c19",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "surface-container-high": "#e9e8e3",
+                        "secondary-fixed-dim": "#96d1ce",
+                        "surface-dim": "#dbdad5",
+                        "tertiary": "#005284",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "on-secondary-container": "#306c6a",
+                        "secondary": "#2b6765"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "shadow-offset": "6px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #faf9f4; }
+        .neo-brutal-shadow {
+            box-shadow: 6px 6px 0px 0px rgba(27,28,25,1);
+        }
+        .neo-brutal-shadow-active {
+            box-shadow: 0px 0px 0px 0px rgba(27,28,25,1);
+            transform: translate(6px, 6px);
+        }
+        .neo-brutal-shadow-sm {
+            box-shadow: 4px 4px 0px 0px rgba(27,28,25,1);
+        }
+        .topo-bg {
+            background-image: radial-gradient(#1b1c19 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+            opacity: 0.05;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 flex justify-between items-center px-margin-mobile py-4 bg-surface border-b-2 border-on-background shadow-[6px_6px_0px_0px_rgba(27,28,25,1)]">
+<div class="flex items-center gap-2 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">radar</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black tracking-tighter text-primary uppercase">LARI</h1>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-2 rounded-lg transition-colors active:translate-x-[2px] active:translate-y-[2px]">
+            settings
+        </button>
+</header>
+<main class="flex-grow px-margin-mobile py-8 pb-32 max-w-2xl mx-auto w-full space-y-8 relative overflow-hidden">
+<div class="absolute inset-0 topo-bg -z-10"></div>
+<!-- PILOT STATUS Header -->
+<section class="bg-primary text-on-primary p-6 border-2 border-on-background neo-brutal-shadow">
+<h2 class="font-label-caps text-label-caps mb-2 opacity-80">CURRENT STATUS</h2>
+<div class="flex justify-between items-end">
+<div class="font-headline-lg-mobile text-headline-lg-mobile uppercase font-black">PILOT STATUS</div>
+<div class="flex items-center gap-2 bg-on-background text-primary px-3 py-1 border-2 border-on-background neo-brutal-shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-caps text-label-caps">ACTIVE</span>
+</div>
+</div>
+</section>
+<!-- PILOT CONFIG Card -->
+<section class="bg-surface border-2 border-on-background p-6 neo-brutal-shadow">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile uppercase mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined">settings_suggest</span>
+                PILOT CONFIG
+            </h3>
+<form class="space-y-6">
+<div>
+<label class="block font-label-caps text-label-caps mb-2 text-on-surface-variant">USERNAME</label>
+<input class="w-full bg-surface-container border-2 border-on-background p-4 rounded-lg font-body-lg text-body-lg focus:outline-none focus:ring-0 focus:border-primary transition-all neo-brutal-shadow-sm focus:translate-x-[-2px] focus:translate-y-[-2px]" type="text" value="streetRunner"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps mb-2 text-on-surface-variant">SCOUT TAG</label>
+<input class="w-full bg-surface-container border-2 border-on-background p-4 rounded-lg font-body-lg text-body-lg focus:outline-none focus:ring-0 focus:border-primary transition-all neo-brutal-shadow-sm focus:translate-x-[-2px] focus:translate-y-[-2px]" type="text" value="Scout"/>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-black py-4 border-2 border-on-background neo-brutal-shadow active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all uppercase tracking-widest" type="button">
+                    UPDATE CONFIG
+                </button>
+</form>
+</section>
+<!-- CUMULATIVE STATS Card -->
+<section class="bg-secondary-container border-2 border-on-background p-6 neo-brutal-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl">analytics</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile uppercase mb-8 relative z-10">CUMULATIVE STATS</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+<div class="bg-surface border-2 border-on-background p-4 neo-brutal-shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">TOTAL DISTANCE</p>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl text-headline-xl text-secondary">112.4</span>
+<span class="font-label-caps text-label-caps text-secondary">KM</span>
+</div>
+</div>
+<div class="bg-surface border-2 border-on-background p-4 neo-brutal-shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">SECTORS CAPTURED</p>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl text-headline-xl text-secondary">14</span>
+<span class="font-label-caps text-label-caps text-secondary">ZONES</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Profile Detail Image -->
+<div class="border-2 border-on-background neo-brutal-shadow rounded-lg overflow-hidden h-48 w-full bg-surface-variant relative">
+<img alt="Urban Runner" class="w-full h-full object-cover grayscale contrast-125" data-alt="A gritty close-up portrait of an urban street runner at dusk, their face partially obscured by shadows and high-contrast red neon lighting. The aesthetic is neo-brutalist and mechanical, with industrial textures and a raw, atmospheric mood. The background shows blurred city architecture with sharp geometric lines. The lighting is dramatic and moody, emphasizing sweat and the intensity of athletic performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlxxjafFBLVMMD4yA2k9eFIPLrU96hohnmUBcDFH0X1Qsol4qRAnYcdentpRsvuoG6vCIAKkpaKZBIZw7RF8PDJjwYinKrQeoR-PnUDq0kD4nl9-iSwlWpOI7M2pmJ8Shv78Ec3_EnyIJ__5WKxGYel_rP40FMKE1Hl5yVYH9HiP-BNa-6zY_NEFLiCB9tfaZ3WP0ganjmU-i52ooUS6PXgjYAqwyQyScEPAn1Sr6KMLDoNV3a-L5A7Ndwhc0glN2y82LiyT7CUk4v"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-surface border-t-2 border-on-background">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps text-label-caps">MAPS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-label-caps">TERRITORY</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">LOGS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim bg-secondary-container dark:bg-on-secondary-fixed-variant rounded-xl border-2 border-on-background py-1 px-4 shadow-[4px_4px_0px_0px_rgba(27,28,25,1)] active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">PILOT</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('neo-brutal-shadow-active');
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('neo-brutal-shadow-active');
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('neo-brutal-shadow-active');
+            });
+        });
+    </script>
+</body></html>

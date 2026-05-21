@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LARI - Pilot Profile Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e3de",
+                        "secondary-container": "#afebe7",
+                        "on-tertiary-fixed": "#001d33",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#0a4f4d",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5b403d",
+                        "surface": "#faf9f4",
+                        "inverse-on-surface": "#f2f1ec",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#ffb4ab",
+                        "on-secondary-fixed": "#00201f",
+                        "on-primary-fixed": "#410002",
+                        "primary": "#a2000e",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c19",
+                        "background": "#faf9f4",
+                        "outline-variant": "#e4beb9",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "surface-container-highest": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#b2eeea",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary-container": "#006baa",
+                        "surface-tint": "#bb171b",
+                        "primary-container": "#c72222",
+                        "tertiary-fixed": "#cfe5ff",
+                        "on-primary-container": "#ffdeda",
+                        "surface-bright": "#faf9f4",
+                        "outline": "#906f6c",
+                        "on-tertiary-container": "#d5e8ff",
+                        "on-primary-fixed-variant": "#93000c",
+                        "on-surface": "#1b1c19",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "surface-container-high": "#e9e8e3",
+                        "secondary-fixed-dim": "#96d1ce",
+                        "surface-dim": "#dbdad5",
+                        "tertiary": "#005284",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "on-secondary-container": "#306c6a",
+                        "secondary": "#2b6765"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "shadow-offset": "6px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 6px 6px 0px 0px rgba(27,28,25,1);
+        }
+        .active-neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(27,28,25,1);
+        }
+        .press-effect:active {
+            transform: translate(2px, 2px);
+            box-shadow: none !important;
+        }
+        .topo-bg {
+            background-image: radial-gradient(#1b1c19 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+            opacity: 0.05;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 border-b-2 border-on-background bg-surface flex justify-between items-center px-margin-mobile py-4 shadow-[6px_6px_0px_0px_rgba(27,28,25,1)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="radar">radar</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black tracking-tighter text-primary uppercase">LARI</h1>
+</div>
+<button class="hover:bg-surface-variant transition-colors active:translate-x-[2px] active:translate-y-[2px] active:shadow-none p-1">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="px-margin-mobile pt-8 space-y-8 max-w-2xl mx-auto">
+<!-- Profile Header Card -->
+<section class="relative bg-secondary-container border-2 border-on-background p-6 neo-shadow overflow-hidden">
+<div class="topo-bg absolute inset-0 pointer-events-none"></div>
+<div class="relative z-10">
+<h2 class="font-headline-xl text-headline-lg-mobile uppercase mb-2">PROFILE SETTINGS</h2>
+<div class="flex items-center gap-4 mt-4">
+<div class="w-16 h-16 rounded-full border-2 border-on-background overflow-hidden bg-surface">
+<img alt="Pilot Avatar" class="w-full h-full object-cover" data-alt="A gritty, high-contrast portrait of an urban runner with athletic gear, illuminated by harsh red neon light against a dark city background. The aesthetic is raw and Neo-Brutalist, focusing on sharp shadows and professional performance textures. Deep blacks and vibrant Merah red define the lighting, conveying a sense of high-intensity athletic focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW2wLHTiqF_i80RRUpAnzcfaVC5M8P6zskWVjj67kB_h8TT9nLjTc-YPw20zXPGWlj4-HsOpjEfPRnADJnBZj-HyoG_JeNdoyR4jDFqRgVHl_nD852NWBcCZ97J-S_M04rg_VypRnNwCzx29RRF-yXh4lrqAQalkItjlKH4dq3yU2J6wS9kZDTcyexl5gFkhbGf0n21QxvJ9EbMXQns8hoY_ZT39GX_3QpBxzr9KJxL1juqZJ3d5HZPWF6Vb-tybInjJ7_IAwOXlG_"/>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-secondary-container">PILOT ID</p>
+<p class="font-headline-lg-mobile text-xl">X-RAY_RUNNER_88</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Settings List -->
+<div class="space-y-4">
+<div class="bg-surface border-2 border-on-background neo-shadow divide-y-2 divide-on-background">
+<!-- ACCOUNT PRIVACY -->
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-background" data-icon="shield_person">shield_person</span>
+<span class="font-bold text-lg">ACCOUNT PRIVACY</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- GUILD SETTINGS -->
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-background" data-icon="groups">groups</span>
+<span class="font-bold text-lg">GUILD SETTINGS</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- NOTIFICATION PREFERENCES -->
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-background" data-icon="notifications_active">notifications_active</span>
+<span class="font-bold text-lg">NOTIFICATION PREFERENCES</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Privacy Mode Button -->
+<button class="w-full bg-primary-container text-on-primary-container border-2 border-on-background p-5 neo-shadow press-effect flex items-center justify-center gap-3 transition-transform">
+<span class="material-symbols-outlined" data-icon="ghost" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mist</span>
+<span class="font-headline-lg-mobile text-lg uppercase tracking-tight">ENABLE GHOST MODE</span>
+</button>
+<!-- Logout -->
+<div class="flex justify-center pt-4">
+<button class="px-10 py-3 border-2 border-on-background bg-surface font-bold uppercase tracking-widest hover:bg-on-background hover:text-surface transition-all active:scale-95">
+                LOGOUT PILOT
+            </button>
+</div>
+<!-- Footer Info -->
+<footer class="text-center space-y-2 opacity-60 pb-8">
+<p class="font-label-caps text-label-caps">TERMS &amp; CONDITIONS</p>
+<p class="font-label-caps text-label-caps">LARI v1.0</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-surface border-t-2 border-on-background dark:border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-caps text-label-caps mt-1">MAPS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps mt-1">TERRITORY</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:text-primary transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-caps text-label-caps mt-1">LOGS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim bg-secondary-container dark:bg-on-secondary-fixed-variant rounded-xl border-2 border-on-background py-1 px-4 shadow-[4px_4px_0px_0px_rgba(27,28,25,1)] transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps mt-1">PILOT</span>
+</a>
+</nav>
+<script>
+        // Simple click interaction for Ghost Mode button toggle
+        const ghostBtn = document.querySelector('.bg-primary-container');
+        let isGhost = false;
+        
+        ghostBtn.addEventListener('click', () => {
+            isGhost = !isGhost;
+            if (isGhost) {
+                ghostBtn.classList.remove('bg-primary-container', 'text-on-primary-container');
+                ghostBtn.classList.add('bg-on-background', 'text-surface');
+                ghostBtn.querySelector('span:last-child').textContent = 'GHOST MODE ACTIVE';
+            } else {
+                ghostBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+                ghostBtn.classList.remove('bg-on-background', 'text-surface');
+                ghostBtn.querySelector('span:last-child').textContent = 'ENABLE GHOST MODE';
+            }
+        });
+    </script>
+</body></html>
