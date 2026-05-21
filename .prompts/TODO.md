@@ -6,32 +6,30 @@
 - [x] Map Dashboard UI (Neo-Brutalism, Dynamic Widget, Recenter, Resumable HUD)
 - [x] Fix Location Errors & Permissions
 - [x] Supabase Core Setup & Auth Infrastructure
-- [ ] Implement Turf.js (Smoothing & Inflection Point Extraction)
-- [ ] Closed-Boundary Polygon Capture Logic
-- [ ] Supabase Data Sync (Saving routes to PostGIS)
-- [ ] Custom MapLibre `style.json` (Detailing roads and buildings)
+- [x] Implement Turf.js (Smoothing & Inflection Point Extraction)
+- [x] Closed-Boundary Polygon Capture Logic
+- [x] Supabase Data Sync (Saving routes & Polygons to PostGIS)
+- [x] Tactical HUD Refinement (2:1 Ratio, Safe Mode, 2s Long Press)
+- [x] Mission Complete Summary Modal (Neobrutalism Light)
 
 ## Phase 2: Gamification & Scale (Upcoming)
-- [ ] Background Location Task Manager (Expo Location)
-- [ ] District Clipping Logic dengan GeoJSON (Batas Kecamatan)
+- [ ] District Clipping Logic dengan GeoJSON (Batas Kecamatan Kabupaten Kuningan)
+- [ ] Open Path Persistence & 48h Expiration (Cicil Wilayah)
+- [ ] Social Media Share Templates (IG Story, Image Export)
 - [ ] Multi-Tier Leaderboard Logic (Kecamatan -> Kabupaten -> Provinsi)
 - [ ] Season Reset System (Mingguan/Bulanan) via Supabase Cron Jobs (pg_cron)
 - [ ] Guild/Regu System & Co-op Territory Capture
-- [ ] Badge & XP System UI
+- [ ] Background Location Task Manager (Expo Location)
 - [ ] Final Testing & QA (Manual/Auto)
 
 ## Feedback & Next Session Priority
-Besok kita akan masuk ke tahap **"Menghidupkan Mesin Game"**. Fokus utamanya adalah merangkai algoritma Turf.js dengan data Supabase.
+Besok kita akan masuk ke tahap **"Strategi Wilayah & Ekspansi"**. Kita akan fokus ke akurasi batasan wilayah dan fitur berbagi.
 
-1. **Algoritma Poligon Tertutup (Closed-Loop):** Kita akan bikin sistem yang ngecek setiap titik GPS lu. Kalau titik akhir lu "menyentuh" titik awal lu (radius 10-20 meter), sistem bakal otomatis *snap* dan ngebentuk sebuah Area (Polygon).
-2. **Data Compression (Chain-Code):** Kita bakal terapin filter `bearing` (sudut arah). Jadi rute lari lu gak menuh-menuhin database dengan ribuan koordinat, melainkan cuma belokan-belokan pentingnya aja.
-3. **Save to PostGIS:** Rute yang berhasil lu tutup itu bakal kita lempar ke tabel `runs` dan `territories` di Supabase, biar langsung kelihatan merah di peta lu.
+1. **District Clipping (Kecamatan):** Kita bakal pake data GeoJSON batas kecamatan di Kuningan. Jadi wilayah lu gak bakal "bocor" ke kecamatan tetangga, harus tetep rapi kepotong batas administratif.
+2. **Open Path & Expiration (48 Jam):** Kita aktifkan fitur nyambung rute lari kemarin ke hari ini, tapi ada batas waktu biar gak curang.
+3. **Share Templates:** Bikin desain kartu "Mission Accomplished" yang siap pamer di Instagram Story dengan gaya Neobrutalism tajam.
 
 ---
-
-**Sistem Season & Leaderboard Berjenjang:** Ide lu untuk nge-skala *Rank* dari Kecamatan -> Kabupaten -> Provinsi dengan *Season Reset* itu **brilian**. Itu persis strategi e-Sport! Gue udah tambahin ini ke "Phase 2". Kita bisa eksekusi ini pake *Edge Functions* dan *pg_cron* di Supabase nanti, biar reset *Season*-nya jalan otomatis tiap Minggu jam 00:00 tanpa membebani aplikasi di HP user.
-
-*Update setiap perkembangan task.*
 
 gemini --resume 6cb9adfa-0f02-4ae9-88f7-03207eee668b
 gemini --resume 6cb9adfa-0f02-4ae9-88f7-03207eee668b

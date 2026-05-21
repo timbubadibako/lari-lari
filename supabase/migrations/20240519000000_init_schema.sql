@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS public.runs (
   calories FLOAT DEFAULT 0,
   status TEXT DEFAULT 'pending', -- 'pending' for open path, 'closed' for captured territory
   path_geometry GEOMETRY(LineString, 4326), -- Stores the GPS route
+  captured_polygon GEOMETRY(MultiPolygon, 4326), -- Snapshot of territories gained in this run
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS public.territories (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   district_code TEXT, -- To map to administrative boundaries
-  boundary GEOMETRY(Polygon, 4326),
+  boundary GEOMETRY(MultiPolygon, 4326),
   leader_id UUID REFERENCES public.profiles(id),
   guild_id UUID NULL,
   last_captured_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -65,6 +66,12 @@ CREATE POLICY "Users can insert their own runs" ON public.runs
 CREATE POLICY "Territories are viewable by everyone" ON public.territories
   FOR SELECT USING (true);
 
+CREATE POLICY "Users can insert territories" ON public.territories
+  FOR INSERT WITH CHECK (auth.uid() = leader_id);
+
+CREATE POLICY "Users can update their own territories" ON public.territories
+  FOR UPDATE USING (auth.uid() = leader_id);
+
 -- 4. FUNCTIONS & TRIGGERS
 -- Auto-create profile on signup
 CREATE OR REPLACE FUNCTION public.handle_new_user()
@@ -73,6 +80,27 @@ BEGIN
   INSERT INTO public.profiles (id, username, display_name, avatar_url)
   VALUES (new.id, new.raw_user_meta_data->>'username', new.raw_user_meta_data->>'display_name', new.raw_user_meta_data->>'avatar_url');
   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- NEW: Function to merge all territories for a specific user into a single geometry
+CREATE OR REPLACE FUNCTION public.consolidate_user_territories(p_user_id UUID)
+RETURNS VOID AS $$
+DECLARE
+  merged_geom GEOMETRY;
+BEGIN
+  -- 1. Create a union of all current boundaries for this user
+  SELECT ST_Multi(ST_Union(boundary)) INTO merged_geom
+  FROM public.territories
+  WHERE leader_id = p_user_id;
+
+  -- 2. Remove the old fragments
+  DELETE FROM public.territories
+  WHERE leader_id = p_user_id;
+
+  -- 3. Insert the new consolidated boundary
+  INSERT INTO public.territories (name, leader_id, boundary)
+  VALUES ('Unified Sector', p_user_id, merged_geom);
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 

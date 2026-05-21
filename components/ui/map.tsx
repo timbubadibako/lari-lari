@@ -443,11 +443,13 @@ function MapRoute({
       <Layer
         id={layerId}
         type="line"
-        style={{
+        paint={{
           lineColor: color,
           lineWidth: width,
           lineOpacity: opacity,
           ...(dashArray && { lineDasharray: dashArray }),
+        }}
+        layout={{
           lineJoin: "round",
           lineCap: "round",
         }}
@@ -548,7 +550,6 @@ export { LocationManager };
     MarkerPopup,
     useCurrentPosition,
     useMap,
-    FillLayer,
-    LineLayer,
+    Layer,
     GeoJSONSource
   };

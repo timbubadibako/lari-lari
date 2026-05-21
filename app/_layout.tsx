@@ -5,12 +5,14 @@ import "../global.css";
 
 import { ThemeProvider } from '@/lib/theme-context';
 import { PortalHost } from '@rn-primitives/portal';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import * as SplashScreen from 'expo-splash-screen';
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { View, ActivityIndicator } from 'react-native';
-import { BottomNav } from '@/components/ui/bottom-nav';
-import { useRunStore } from '@/lib/store';
+
+// Keep the splash screen visible while we fetch the session
+SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
   initialRouteName: 'index',
@@ -22,7 +24,6 @@ export default function RootLayout() {
   const segments = useSegments();
   const router = useRouter();
   const navigationState = useRootNavigationState();
-  const { isHUDActive } = useRunStore();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -47,22 +48,16 @@ export default function RootLayout() {
     } else if (session && inAuthGroup) {
       router.replace('/');
     }
+
+    // Hide splash screen once we know which route to show
+    SplashScreen.hideAsync();
   }, [session, segments, isInitialized, navigationState?.key]);
 
-  if (!isInitialized) {
-    return (
-      <View style={{ flex: 1, backgroundColor: '#E0E0E0', alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color="#C72222" />
-      </View>
-    );
-  }
-
-  // Hide BottomNav on Auth screen or when running HUD is active
-  const showBottomNav = session && segments[0] !== 'auth' && !isHUDActive;
-
+  // WE MUST ALWAYS RETURN <Stack> IN EXPO ROUTER v3
+  // Returning a View/ActivityIndicator destroys the Navigation Context
   return (
-    <ThemeProvider>
-      <View className="flex-1 bg-slate-900">
+    <SafeAreaProvider>
+      <ThemeProvider>
         <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="auth" />
@@ -71,10 +66,9 @@ export default function RootLayout() {
           <Stack.Screen name="profile/index" />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
-        {showBottomNav && <BottomNav />}
-      </View>
-      <PortalHost />
-      <StatusBar style="auto" />
-    </ThemeProvider>
+        <PortalHost />
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
