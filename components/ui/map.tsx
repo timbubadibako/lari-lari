@@ -108,7 +108,8 @@ function Map({
   const cameraRef = useRef<CameraRef | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const { colorScheme } = useTheme();
-  const theme = colorScheme === "dark" ? "dark" : "light";
+  // Force light theme for now as the app is light-mode only
+  const theme = "light";
 
   const mapStyle =
     theme === "dark"

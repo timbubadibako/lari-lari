@@ -160,7 +160,7 @@ export default function HomeScreen() {
     <View className="flex-1 bg-white">
       {/* 1. MAP LAYER */}
       <View className="absolute inset-0 z-0">
-        <Map center={initialRegion} zoom={15} showLoader={false} styles={{ light: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json", dark: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" }}>
+        <Map center={initialRegion} zoom={15} showLoader={false}>
           <MapUserLocation />
           {territories.map((t) => (
             <GeoJSONSource key={t.id} id={`source-${t.id}`} data={t.boundary}>

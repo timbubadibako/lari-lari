@@ -10,10 +10,9 @@
 - [x] Closed-Boundary Polygon Capture Logic
 - [x] Supabase Data Sync (Saving routes & Polygons to PostGIS)
 - [x] Tactical HUD Refinement (2:1 Ratio, Safe Mode, 2s Long Press)
-- [x] Mission Complete Summary Modal (Neobrutalism Light)
+- [x] Mission Complete Summary Modal (Neobrutalism Pro, Animated, 3D Blocks)
 
 ## Phase 2: Gamification & Scale (Upcoming)
-- [ ] District Clipping Logic dengan GeoJSON (Batas Kecamatan Kabupaten Kuningan)
 - [ ] Open Path Persistence & 48h Expiration (Cicil Wilayah)
 - [ ] Social Media Share Templates (IG Story, Image Export)
 - [ ] Multi-Tier Leaderboard Logic (Kecamatan -> Kabupaten -> Provinsi)
@@ -23,11 +22,11 @@
 - [ ] Final Testing & QA (Manual/Auto)
 
 ## Feedback & Next Session Priority
-Besok kita akan masuk ke tahap **"Strategi Wilayah & Ekspansi"**. Kita akan fokus ke akurasi batasan wilayah dan fitur berbagi.
+Kita telah menyelesaikan perbaikan besar pada UI ringkasan misi dan pembersihan sistem tema.
 
-1. **District Clipping (Kecamatan):** Kita bakal pake data GeoJSON batas kecamatan di Kuningan. Jadi wilayah lu gak bakal "bocor" ke kecamatan tetangga, harus tetep rapi kepotong batas administratif.
-2. **Open Path & Expiration (48 Jam):** Kita aktifkan fitur nyambung rute lari kemarin ke hari ini, tapi ada batas waktu biar gak curang.
-3. **Share Templates:** Bikin desain kartu "Mission Accomplished" yang siap pamer di Instagram Story dengan gaya Neobrutalism tajam.
+1. **Open Path & Expiration (48 Jam):** Fokus selanjutnya adalah mengaktifkan fitur nyambung rute lari kemarin ke hari ini agar pengguna bisa mengklaim wilayah luas secara bertahap.
+2. **Social Media Share Templates:** Mengembangkan fitur ekspor gambar hasil lari yang lebih estetik (IG Story style) berdasarkan UI Mission Complete yang sudah ada.
+3. **Background Tracking:** Memastikan pelacakan tetap stabil saat aplikasi diminimize.
 
 ---
 

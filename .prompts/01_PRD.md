@@ -25,8 +25,8 @@
 * [US-01] Sebagai pengguna, saya ingin melacak rute lari saya secara real-time agar saya bisa melihat progress jarak dan waktu saya.
 * [US-02] Sebagai pengguna, saya ingin membuat wilayah (Territory) dengan cara berlari membentuk jalur tertutup (closed boundary) agar area di dalamnya menjadi milik saya.
 * [US-03] Sebagai pengguna, saya ingin bisa melanjutkan rute lari yang belum tertutup pada hari berikutnya, agar saya bisa mengklaim wilayah yang luas tanpa harus menyelesaikannya dalam satu hari.
-* [US-04] Sebagai pengguna, saya ingin wilayah yang saya klaim dipotong secara otomatis sesuai batas administratif kecamatan (District Clipping), agar permainan terstruktur per wilayah.
-* [US-05] Sebagai pengguna, saya ingin mengganti tema aplikasi menjadi Glassmorphism agar mendapatkan visual yang lebih estetik dan futuristik.
+* [US-04] Sebagai pengguna, saya ingin wilayah yang saya klaim tetap rapi sesuai rute saya (District Clipping bersifat opsional/future update).
+* [US-05] Sebagai pengguna, saya ingin antarmuka aplikasi menggunakan gaya Neobrutalism Tactical yang tajam dan kontras tinggi.
 * [US-06] Sebagai pengguna, saya ingin mendapatkan XP dan Badge setelah lari agar merasa dihargai atas usaha saya.
 
 ## 4. Non-Functional Requirements
