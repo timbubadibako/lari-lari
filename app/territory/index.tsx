@@ -1,95 +1,107 @@
-import { View, Text, SafeAreaView, Platform, StatusBar, ScrollView, Pressable, Image } from 'react-native';
-import { Trophy, Compass, Shield, Search } from 'lucide-react-native';
+import { View, Text as RNText, SafeAreaView, Platform, StatusBar, ScrollView, Pressable, Image } from 'react-native';
+import { Shield, Search, Map as MapIcon, ChevronRight } from 'lucide-react-native';
 import { BottomNav } from '@/components/ui/bottom-nav';
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 export default function TerritoryScreen() {
   return (
-    <View className="flex-1 bg-silver-white" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-      <ScrollView className="flex-1 p-4" contentContainerStyle={{ paddingBottom: 100 }}>
+    <View className="flex-1 bg-midnight-900" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+      <StatusBar barStyle="light-content" />
+      
+      <ScrollView className="flex-1 p-6" contentContainerStyle={{ paddingBottom: 120 }}>
         
-        <View className="relative w-full mb-6 mt-2">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-biru-gelap" />
-          <View className="bg-silver-white border-2 border-biru-gelap p-4 flex-row justify-between items-center">
+        {/* Header */}
+        <View className="mb-10 mt-6 text-center items-center">
+          <Text className="text-xs font-bold uppercase tracking-[0.4em] text-sky-500 mb-2">Dominion Status</Text>
+          <Text className="text-5xl font-serif italic text-white">Sectors</Text>
+        </View>
+
+        {/* Current Operation Card */}
+        <Card variant="sapphire" className="mb-6">
+          <View className="flex-row justify-between items-center">
             <View>
-              <Text className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Current Operation</Text>
-              <Text className="font-outfit text-2xl font-black text-slate-900 uppercase mt-1 leading-tight">District{'\n'}Sector</Text>
+              <Text className="text-[9px] uppercase tracking-[0.3em] text-sky-600 font-bold mb-2">Current Operation</Text>
+              <Text className="text-3xl font-serif italic text-white leading-none">South District</Text>
             </View>
-            <View className="bg-merah border-2 border-biru-gelap px-3 py-2">
-              <Text className="text-[10px] font-bold text-white uppercase tracking-widest">Reset In: 06D</Text>
-              <Text className="font-outfit text-lg font-black text-white uppercase">14H 32M</Text>
+            <View className="items-end">
+              <Text className="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Reset In</Text>
+              <Text className="text-xl font-bold text-sky-400">14H 32M</Text>
             </View>
           </View>
-        </View>
+        </Card>
 
-        <View className="relative w-full mb-6">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-biru-gelap" />
-          <View className="bg-white border-2 border-biru-gelap flex-col overflow-hidden">
-            <View className="flex-row justify-between items-center p-3 border-b-2 border-biru-gelap">
-              <View className="flex-row items-center gap-2">
-                <Compass size={16} color="#1E293B" />
-                <Text className="text-xs font-bold text-slate-900 uppercase tracking-widest">Live Grid Overview</Text>
-              </View>
-              <View className="flex-row gap-3">
-                <View className="flex-row items-center gap-1"><View className="w-3 h-3 bg-biru-gelap border border-slate-900" /><Text className="text-[9px] font-bold text-slate-900 uppercase">Guild</Text></View>
-                <View className="flex-row items-center gap-1"><View className="w-3 h-3 bg-orange-600 border border-slate-900" /><Text className="text-[9px] font-bold text-slate-900 uppercase">Enemy</Text></View>
-              </View>
-            </View>
-            
-            <View className="w-full h-48 bg-slate-200 items-center justify-center relative overflow-hidden">
-               <Image source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AExO-B7s6HhXy51_F854k9_0P-c9B8x6_014C-A2v95k01Z-Yw2_Y83q2X4Q4c89_z9P8Q4E9_11A5x-L8kQ_011B-A7c-C9x9v6_A5A7_Y229G-M7R6x_G5P_285E-G789_A3E0x0Q4N9x90M815K_7_B36_Z5A-G5B-D0y_Y_49-Q29A_P2x0w8Y7G9_90_G-J90-B8x98' }} className="absolute inset-0 w-full h-full opacity-30" resizeMode="cover" />
-               <Text className="text-4xl opacity-50 z-10">⬡ ⬢ ⬡</Text>
-               <Text className="text-4xl opacity-50 z-10 ml-6 mt-[-15px]">⬢ ⬢ ⬡</Text>
-               <Text className="text-4xl opacity-50 z-10 mt-[-15px]">⬡ ⬢ ⬡</Text>
-            </View>
+        {/* Mini Map Fragment */}
+        <Card variant="glass" className="mb-6 p-0 overflow-hidden border border-white/5 rounded-[2.5rem]">
+           <View className="h-48 relative bg-slate-800">
+             <Image 
+                source={{ uri: 'https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/12/2144/1454.png' }} 
+                className="absolute inset-0 w-full h-full opacity-40" 
+                resizeMode="cover" 
+             />
+             <View className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+             <View className="absolute bottom-6 left-1/2 -translate-x-1/2 flex-row gap-2">
+                 <View className="w-2 h-2 rounded-full bg-sky-500" />
+                 <View className="w-2 h-2 rounded-full bg-slate-700" />
+                 <View className="w-2 h-2 rounded-full bg-slate-700" />
+             </View>
+             
+             {/* Mock territory highlight */}
+             <View className="absolute top-10 left-10 w-24 h-24 bg-sky-500/20 border-2 border-sky-500 shadow-[0_0_20px_rgba(14,165,233,0.3)] rounded-3xl rotate-12" />
+           </View>
+           <View className="p-8 flex-row justify-between items-center">
+             <View>
+               <Text className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Live Grid Overview</Text>
+               <Text className="text-lg font-serif italic text-white">Central Network</Text>
+             </View>
+             <Pressable className="bg-sky-500/10 border border-sky-500/30 w-12 h-12 rounded-2xl items-center justify-center">
+               <Search size={20} color="#38bdf8" />
+             </Pressable>
+           </View>
+        </Card>
 
-            <Pressable className="bg-biru-gelap p-3 flex-row justify-center items-center gap-2 active:opacity-80">
-              <Search size={16} color="white" />
-              <Text className="text-white font-bold text-xs uppercase tracking-widest">Expand Sector View</Text>
-            </Pressable>
-          </View>
-        </View>
+        {/* Top District Scouts (Leaderboard) */}
+        <Card variant="glass" className="mb-6 p-0 overflow-hidden border border-white/5 rounded-[2.5rem]">
+           <View className="p-8 border-b border-white/5 flex-row justify-between items-center">
+             <Text className="text-xs uppercase tracking-widest font-bold text-slate-400">Top District Operatives</Text>
+             <Shield size={16} color="#38bdf8" />
+           </View>
 
-        <View className="relative w-full">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-biru-gelap" />
-          <View className="bg-silver-white border-2 border-biru-gelap overflow-hidden">
-            <View className="flex-row justify-between items-center p-4 border-b-2 border-biru-gelap">
-               <Text className="font-outfit text-lg font-black text-slate-900 uppercase">Top District Scouts</Text>
-               <Trophy size={18} color="#C72222" />
-            </View>
-
-            <View className="bg-biru-muda p-4 border-b-2 border-biru-gelap flex-row items-center justify-between">
-              <View className="flex-row items-center gap-3">
-                <Text className="font-outfit text-3xl font-black text-slate-900 italic w-8">1.</Text>
+           {/* Rank 1 */}
+           <View className="p-6 px-8 bg-sky-500/5 border-b border-white/5 flex-row items-center justify-between">
+              <View className="flex-row items-center gap-4">
+                <Text className="text-4xl font-serif italic font-bold text-sky-400 w-10">1.</Text>
                 <View>
-                  <View className="flex-row items-center gap-2">
-                    <Text className="font-bold text-lg text-slate-900">@ghostRunner</Text>
-                    <View className="bg-biru-gelap px-1.5 py-0.5"><Text className="text-[8px] font-bold text-white uppercase tracking-widest">Teal Badge</Text></View>
-                  </View>
-                  <Text className="text-xs text-biru-gelap font-bold">Kec. Kuningan, 14 Sectors</Text>
+                  <Text className="font-bold text-base text-white">@ghostRunner</Text>
+                  <Text className="text-[10px] uppercase tracking-widest text-slate-500 mt-1">14 Sectors Secured</Text>
                 </View>
               </View>
-              <Shield size={24} color="#2C5A64" fill="#2C5A64" />
-            </View>
+              <View className="w-8 h-8 rounded-full border border-sky-500/30 flex items-center justify-center bg-sky-500/10">
+                 <Shield size={14} color="#38bdf8" />
+              </View>
+           </View>
 
-            {[2, 3].map(rank => (
-              <View key={rank} className="bg-silver-white p-4 border-b-2 border-biru-gelap flex-row items-center justify-between">
-                <View className="flex-row items-center gap-3">
-                  <Text className="font-outfit text-2xl font-black text-slate-500 italic w-8">{rank}.</Text>
+           {/* Rank 2 & 3 */}
+           {[2, 3].map(rank => (
+             <View key={rank} className="p-6 px-8 border-b border-white/5 flex-row items-center justify-between">
+                <View className="flex-row items-center gap-4">
+                  <Text className="text-2xl font-serif italic font-bold text-slate-600 w-10">{rank}.</Text>
                   <View>
-                    <Text className="font-bold text-base text-slate-900">@runner_{rank}</Text>
-                    <Text className="text-xs text-slate-500 font-bold">Senen, {15-rank} Sectors</Text>
+                    <Text className="font-medium text-sm text-slate-300">@runner_{rank}</Text>
+                    <Text className="text-[9px] uppercase tracking-widest text-slate-600 mt-1">{15 - rank} Sectors Secured</Text>
                   </View>
                 </View>
-              </View>
-            ))}
+             </View>
+           ))}
 
-            <Pressable className="p-4 items-center justify-center active:bg-slate-200">
-               <Text className="text-merah font-bold text-xs uppercase tracking-widest underline decoration-2 underline-offset-4">View Full Rankings</Text>
-            </Pressable>
-          </View>
-        </View>
+           <Pressable className="p-6 items-center justify-center bg-white/5 active:bg-white/10 flex-row gap-2">
+              <Text className="text-xs uppercase tracking-widest font-bold text-slate-400">Access Global Rankings</Text>
+              <ChevronRight size={14} color="#94a3b8" />
+           </Pressable>
+        </Card>
 
       </ScrollView>
+
       <BottomNav activeTab="territory" />
     </View>
   );

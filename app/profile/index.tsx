@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, Platform, StatusBar, ScrollView, Pressable, Image, TextInput } from 'react-native';
-import { Settings, Radar, Shield, Users, Bell, EyeOff } from 'lucide-react-native';
+import { View, Text as RNText, SafeAreaView, Platform, StatusBar, ScrollView, Pressable, Image, TextInput } from 'react-native';
+import { Settings, Shield, User, Map as MapIcon, ChevronRight, EyeOff, LogOut } from 'lucide-react-native';
 import { supabase } from '@/lib/supabase';
 import { useRunStore } from '@/lib/store';
 import { BottomNav } from '@/components/ui/bottom-nav';
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function ProfileScreen() {
   const { profile, setProfile } = useRunStore();
@@ -24,65 +28,83 @@ export default function ProfileScreen() {
   }, [profile?.id]);
 
   return (
-    <View className="flex-1 bg-silver-white" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-      <ScrollView className="flex-1 p-4" contentContainerStyle={{ paddingBottom: 100 }}>
-        <View className="relative w-full mb-6 mt-2">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" />
-          <View className="bg-merah border-[3px] border-slate-900 p-4 flex-row items-center justify-between">
-            <View>
-              <Text className="text-[10px] font-bold text-white/80 uppercase tracking-widest">CURRENT STATUS</Text>
-              <Text className="font-outfit text-2xl font-black text-white uppercase mt-1 tracking-tight">PILOT STATUS</Text>
-            </View>
-            <View className="bg-slate-900 px-3 py-1 flex-row items-center gap-2">
-               <View className="w-2 h-2 rounded-full bg-merah" />
-               <Text className="text-[10px] font-bold text-merah uppercase tracking-widest">ACTIVE</Text>
-            </View>
+    <View className="flex-1 bg-midnight-900" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+      <StatusBar barStyle="light-content" />
+      
+      {/* TopAppBar */}
+      <View className="z-50 border-b border-white/5 pb-2 bg-midnight-700/70 backdrop-blur-xl">
+        <View className="flex-row justify-between items-center px-6 h-16 pt-4">
+          <View className="flex-row items-center gap-4">
+            <User size={24} color="#38bdf8" />
+            <Text className="font-serif italic text-3xl text-white tracking-tighter leading-none mt-1">Identity</Text>
           </View>
+          <Pressable className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl items-center justify-center active:scale-95 transition-all">
+             <Settings size={20} color="#94a3b8" />
+          </Pressable>
         </View>
+      </View>
 
-        <View className="relative w-full mb-6">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" />
-          <View className="bg-biru-muda border-[3px] border-slate-900 p-5">
-            <Text className="font-outfit text-2xl font-black text-slate-900 uppercase mb-4 tracking-tight">PROFILE SETTINGS</Text>
-            <View className="flex-row items-center gap-4">
-              <View className="w-16 h-16 rounded-full border-[3px] border-slate-900 overflow-hidden bg-slate-900 relative">
-                <Image source={{ uri: profile?.avatar_url || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUeLDbNo5N1DWr1zgnfr6lq6nH38NQN4a6n-BakRP-Vk9ax_YUTSEj8XdDGOgNCyw12LAZdIol0rjD6_gjUgstTBUTONp-f5xErbcBnYu-rFGAtiLm9BsdzkMej0TM7mQmVPwxBQ8aCxRxJgqphtomAo_vjlUFkG97gZMZ5ntNPJzK_Z_ypRYQ5BpHM54WeM9RF0PFFoVPpayb5yldrej0Meawyl87alhla8EjSCwZgfsD4Ti8wF_H1IjmuHaCogtEuZWRUdKalr3J' }} className="absolute inset-0 w-full h-full opacity-80" />
-              </View>
+      <ScrollView className="flex-1 p-6" contentContainerStyle={{ paddingBottom: 120 }}>
+        
+        {/* Profile Identity Card */}
+        <Card variant="sapphire" className="mb-6 flex-row items-center gap-6 p-8">
+           <View className="w-20 h-20 rounded-full border border-sky-500/30 overflow-hidden bg-slate-800 relative">
+             <Image source={{ uri: profile?.avatar_url || 'https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/12/2144/1454.png' }} className="absolute inset-0 w-full h-full opacity-80" />
+           </View>
+           <View className="flex-1">
+             <Text className="text-[10px] font-bold uppercase text-sky-600 tracking-[0.3em] mb-1">Operative Designation</Text>
+             <Text className="font-serif italic text-3xl font-bold text-white leading-none">{profile?.username || 'UNKNOWN'}</Text>
+             <View className="mt-3 flex-row items-center gap-2">
+                <View className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" />
+                <Text className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest">Active Link</Text>
+             </View>
+           </View>
+        </Card>
+
+        {/* Configuration */}
+        <Card variant="glass" className="mb-6 p-8">
+           <View className="flex-row items-center gap-4 mb-6">
+              <Settings size={20} color="#38bdf8" />
+              <Text className="font-serif italic text-2xl text-white">Configuration</Text>
+           </View>
+           <View className="space-y-6">
               <View>
-                <Text className="text-[10px] font-bold uppercase text-slate-700 tracking-widest">PILOT ID</Text>
-                <Text className="font-outfit text-xl font-bold text-slate-900 uppercase">{profile?.username || 'UNKNOWN'}</Text>
+                 <RNText className="text-[9px] uppercase tracking-widest text-slate-500 mb-2">Display Name</RNText>
+                 <Input value={profile?.username || ''} />
               </View>
-            </View>
-          </View>
-        </View>
+              <Button variant="sapphireGlass" size="sm" className="w-full">
+                 <Text className="text-sky-400 font-bold text-xs uppercase tracking-widest">Update Data</Text>
+              </Button>
+           </View>
+        </Card>
 
-        <View className="relative w-full mb-6">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" />
-          <View className="bg-silver-white border-[3px] border-slate-900 p-5">
-            <View className="flex-row items-center gap-2 mb-4"><Settings size={20} color="#0f172a" /><Text className="font-outfit text-xl font-black text-slate-900 uppercase tracking-tight">PILOT CONFIG</Text></View>
-            <View className="gap-4">
-               <View>
-                 <Text className="text-[10px] font-bold text-slate-700 uppercase tracking-widest mb-1">USERNAME</Text>
-                 <View className="relative"><View className="absolute top-1 left-1 w-full h-full bg-slate-900 rounded" /><View className="bg-silver-white border-[3px] border-slate-900 px-3 py-2 rounded"><TextInput value={profile?.username || ''} className="font-bold text-sm text-slate-900 p-0" /></View></View>
+        {/* Stats */}
+        <Card variant="glass" className="mb-8 p-8 border-l-2 border-l-sky-500">
+            <Text className="font-serif italic text-2xl text-white mb-6">Cumulative Data</Text>
+            <View className="grid grid-cols-2 gap-4 flex-row">
+               <View className="flex-1 bg-white/5 p-5 rounded-3xl border border-white/5">
+                   <Text className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Total Distance</Text>
+                   <Text className="font-serif italic text-3xl font-bold text-white tracking-tighter leading-none">{loadingStats ? "..." : totalDistance.toFixed(1)} <Text className="text-sm font-sans not-italic text-slate-500">KM</Text></Text>
                </View>
-               <View className="relative mt-2"><View className="absolute top-1 left-1 w-full h-full bg-slate-900" /><Pressable className="bg-merah border-[3px] border-slate-900 py-3 items-center justify-center active:translate-x-1 active:translate-y-1"><Text className="text-white font-bold text-xs uppercase tracking-widest">UPDATE CONFIG</Text></Pressable></View>
+               <View className="flex-1 bg-white/5 p-5 rounded-3xl border border-white/5">
+                   <Text className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Sectors Secured</Text>
+                   <Text className="font-serif italic text-3xl font-bold text-white tracking-tighter leading-none">{loadingStats ? "..." : profile?.territory_count}</Text>
+               </View>
             </View>
-          </View>
+        </Card>
+
+        {/* Actions */}
+        <View className="space-y-4">
+           <Button variant="glass" className="w-full justify-start pl-6 gap-4 border-l-2 border-l-slate-700">
+              <EyeOff size={20} color="#94a3b8" />
+              <Text className="text-white font-bold text-xs uppercase tracking-widest">Enable Ghost Mode</Text>
+           </Button>
+           <Button variant="ghost" onPress={() => supabase.auth.signOut()} className="w-full justify-start pl-6 gap-4">
+              <LogOut size={20} color="#ef4444" />
+              <Text className="text-red-500 font-bold text-xs uppercase tracking-widest">Disconnect Link</Text>
+           </Button>
         </View>
 
-        <View className="relative w-full mb-6">
-          <View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" />
-          <View className="bg-biru-muda border-[3px] border-slate-900 p-5">
-            <Text className="font-outfit text-2xl font-black text-slate-900 uppercase mb-4 tracking-tight">CUMULATIVE STATS</Text>
-            <View className="gap-3">
-               <View className="relative"><View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" /><View className="bg-silver-white border-[3px] border-slate-900 p-3"><Text className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1">TOTAL DISTANCE</Text><Text className="font-outfit text-4xl font-black text-slate-900 tracking-tighter leading-none">{loadingStats ? "..." : totalDistance.toFixed(1)} <Text className="text-sm font-bold">KM</Text></Text></View></View>
-               <View className="relative"><View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" /><View className="bg-silver-white border-[3px] border-slate-900 p-3"><Text className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1">SECTORS CAPTURED</Text><Text className="font-outfit text-4xl font-black text-slate-900 tracking-tighter leading-none">{loadingStats ? "..." : profile?.territory_count} <Text className="text-sm font-bold uppercase">ZONES</Text></Text></View></View>
-            </View>
-          </View>
-        </View>
-
-        <View className="relative w-full mb-8"><View className="absolute top-1.5 left-1.5 w-full h-full bg-slate-900" /><Pressable className="bg-merah border-[3px] border-slate-900 p-4 flex-row items-center justify-center gap-3 active:translate-x-1 active:translate-y-1"><EyeOff size={20} color="white" /><Text className="text-white font-bold text-sm uppercase tracking-widest">ENABLE GHOST MODE</Text></Pressable></View>
-        <View className="relative w-full mb-8 items-center px-10"><View className="absolute top-1.5 left-1.5 w-[80%] h-full bg-slate-900" /><Pressable onPress={() => supabase.auth.signOut()} className="w-[80%] bg-silver-white border-[3px] border-slate-900 p-3 items-center justify-center active:translate-x-1 active:translate-y-1"><Text className="text-slate-900 font-black text-xs uppercase tracking-widest">LOGOUT PILOT</Text></Pressable></View>
       </ScrollView>
       <BottomNav activeTab="pilot" />
     </View>

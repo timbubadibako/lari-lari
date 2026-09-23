@@ -1,79 +1,73 @@
-import { View, Text, SafeAreaView, Platform, StatusBar, ScrollView, TextInput, Image, Pressable } from 'react-native';
-import { Search, ChevronRight, Settings, Radar } from 'lucide-react-native';
+import { View, Text as RNText, SafeAreaView, Platform, StatusBar, ScrollView, TextInput, Image, Pressable } from 'react-native';
+import { Search, ChevronRight, Settings, Radar, History as HistoryIcon } from 'lucide-react-native';
 import { BottomNav } from '@/components/ui/bottom-nav';
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+import { Input } from '@/components/ui/input';
 
 export default function HistoryScreen() {
   return (
-    <View className="flex-1 bg-silver-white" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+    <View className="flex-1 bg-midnight-900" style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+      <StatusBar barStyle="light-content" />
+
       {/* TopAppBar */}
-      <View className="z-50 bg-silver-white border-b-[3px] border-slate-900 pb-2">
-        <View className="flex-row justify-between items-center px-4 h-16">
-          <View className="flex-row items-center gap-2">
-            <Radar size={28} color="#C72222" />
-            <Text className="font-outfit text-3xl font-black tracking-tighter text-merah uppercase">LARI</Text>
+      <View className="z-50 border-b border-white/5 pb-2 bg-midnight-700/70 backdrop-blur-xl">
+        <View className="flex-row justify-between items-center px-6 h-16 pt-4">
+          <View className="flex-row items-center gap-4">
+            <HistoryIcon size={24} color="#38bdf8" />
+            <Text className="font-serif italic text-3xl text-white tracking-tighter leading-none mt-1">Intel Logs</Text>
           </View>
-          <View className="relative">
-             <View className="absolute top-1 left-1 w-full h-full bg-slate-900" />
-             <Pressable className="bg-silver-white border-[3px] border-slate-900 p-1.5 active:translate-x-1 active:translate-y-1">
-               <Settings size={24} color="#0f172a" />
-             </Pressable>
-          </View>
+          <Pressable className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl items-center justify-center active:scale-95 transition-all">
+             <Settings size={20} color="#94a3b8" />
+          </Pressable>
         </View>
       </View>
 
-      <ScrollView className="flex-1 p-4" contentContainerStyle={{ paddingBottom: 100 }}>
+      <ScrollView className="flex-1 p-6" contentContainerStyle={{ paddingBottom: 120 }}>
         
-        <View className="relative w-full mb-6 mt-2">
-          <View className="absolute top-2 left-2 w-full h-full bg-slate-900" />
-          <View className="bg-silver-white border-[3px] border-slate-900 p-5">
-            <Text className="font-outfit text-3xl font-black text-slate-900 uppercase mb-4 tracking-tight">FLIGHT LOGS</Text>
-            <View className="relative w-full">
-              <View className="absolute top-1 left-1 w-full h-full bg-slate-900" />
-              <View className="flex-row items-center bg-silver-white border-[3px] border-slate-900 px-3 h-12">
+        {/* Search Bar */}
+        <View className="relative mb-8">
+            <View className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
                 <Search size={20} color="#64748B" />
-                <TextInput placeholder="SEARCH SESSIONS..." placeholderTextColor="#94A3B8" className="flex-1 ml-3 font-outfit font-bold text-sm tracking-widest uppercase text-slate-900" />
-              </View>
             </View>
-          </View>
+            <Input placeholder="SEARCH OPERATIONS..." className="pl-12 bg-white/5 border-white/10 rounded-2xl border-0 h-14" />
         </View>
 
-        <View className="flex-row items-center gap-3 mb-8 px-1">
+        {/* Filters */}
+        <View className="flex-row items-center gap-3 mb-8">
           {['ALL', 'TODAY', 'THIS WEEK'].map(label => (
-             <View key={label} className="relative">
-                <View className="absolute top-1 left-1 w-full h-full bg-slate-900" />
-                <Pressable className={`border-[3px] border-slate-900 px-4 py-1.5 active:translate-x-1 active:translate-y-1 ${label === 'THIS WEEK' ? 'bg-biru-muda' : 'bg-silver-white'}`}>
-                  <Text className="font-bold text-xs uppercase tracking-widest text-slate-900">{label}</Text>
-                </Pressable>
-             </View>
+             <Pressable key={label} className={`px-5 py-2.5 rounded-full border ${label === 'THIS WEEK' ? 'bg-sky-500/10 border-sky-500/30' : 'bg-transparent border-white/10'}`}>
+                <Text className={`font-bold text-[10px] uppercase tracking-widest ${label === 'THIS WEEK' ? 'text-sky-400' : 'text-slate-400'}`}>{label}</Text>
+             </Pressable>
           ))}
         </View>
 
-        <View className="gap-6 px-1">
+        <View className="gap-6">
           {[1, 2, 3].map(i => (
-            <View key={i} className="relative w-full">
-              <View className="absolute top-2 left-2 w-full h-full bg-slate-900" />
-              <View className="bg-silver-white border-[3px] border-slate-900 p-3 flex-row items-center gap-4">
-                <View className="w-24 h-24 bg-slate-900 border-[3px] border-slate-900 relative overflow-hidden">
-                   <Image source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUeLDbNo5N1DWr1zgnfr6lq6nH38NQN4a6n-BakRP-Vk9ax_YUTSEj8XdDGOgNCyw12LAZdIol0rjD6_gjUgstTBUTONp-f5xErbcBnYu-rFGAtiLm9BsdzkMej0TM7mQmVPwxBQ8aCxRxJgqphtomAo_vjlUFkG97gZMZ5ntNPJzK_Z_ypRYQ5BpHM54WeM9RF0PFFoVPpayb5yldrej0Meawyl87alhla8EjSCwZgfsD4Ti8wF_H1IjmuHaCogtEuZWRUdKalr3J' }} className="absolute inset-0 w-full h-full opacity-40" />
+            <Card key={i} variant="glass" className="p-0 overflow-hidden rounded-[2rem] flex-row h-32">
+                <View className="w-32 h-full bg-slate-800 relative">
+                   <Image 
+                      source={{ uri: 'https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/12/2144/1454.png' }} 
+                      className="absolute inset-0 w-full h-full opacity-40" 
+                   />
+                   <View className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/90" />
+                   {/* Mock territory highlight */}
+                   <View className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-sky-500/20 border-2 border-sky-500 shadow-[0_0_15px_rgba(14,165,233,0.3)] rounded-2xl rotate-12" />
                 </View>
-                <View className="flex-1 justify-center py-1">
+                <View className="flex-1 p-5 justify-center">
                    <View className="flex-row justify-between items-center mb-1">
-                      <Text className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">MAY {19-i}, 2026</Text>
-                      <ChevronRight size={16} color="#0f172a" />
+                      <Text className="text-[9px] font-bold text-sky-500 uppercase tracking-widest">MAY {19-i}, 2026</Text>
+                      <ChevronRight size={16} color="#475569" />
                    </View>
-                   <Text className="font-outfit text-3xl font-black text-slate-900 tracking-tighter leading-none mb-1">{9+i}.32 <Text className="text-sm">KM</Text></Text>
-                   <View className="flex-row justify-between items-end mt-1">
-                      <Text className="text-xs font-bold text-slate-600 tracking-widest">⏱ 01:14:02</Text>
-                      <View className="relative">
-                         <View className="absolute top-[2px] left-[2px] w-full h-full bg-slate-900" />
-                         <View className="bg-biru-muda border-2 border-slate-900 px-2 py-0.5">
-                            <Text className="text-[10px] font-black text-slate-900 uppercase tracking-widest">{100+i*50} XP</Text>
-                         </View>
-                      </View>
+                   <Text className="font-serif italic text-3xl text-white tracking-tighter leading-none mb-1">
+                      {9+i}.32 <Text className="text-sm font-sans not-italic text-slate-500">KM</Text>
+                   </Text>
+                   <View className="flex-row justify-between items-end mt-1 border-t border-white/5 pt-2">
+                      <Text className="text-[10px] font-medium text-slate-400 tracking-widest">⏱ 01:14:02</Text>
+                      <Text className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">+{100+i*50} XP</Text>
                    </View>
                 </View>
-              </View>
-            </View>
+            </Card>
           ))}
         </View>
 

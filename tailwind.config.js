@@ -41,11 +41,28 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        success: "#059669",
-        "merah": "#C72222",
-        "biru-muda": "#8CC7C4",
-        "biru-gelap": "#2C5A64",
-        "silver-white": "#E0E0E0",
+        // Midnight Sapphire specific colors
+        sapphire: {
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          900: '#0c4a6e',
+        },
+        midnight: {
+          900: '#010413',
+          800: '#020617',
+          700: '#0f172a',
+        },
+        emerald: {
+          500: '#10b981',
+        },
+        crimson: {
+          500: '#ef4444',
+        },
+        platinum: {
+          100: '#f1f5f9',
+          300: '#cbd5e1',
+          500: '#64748b',
+        }
       },
       spacing: {
         "unit": "8px",
@@ -57,8 +74,10 @@ module.exports = {
         hairline: hairlineWidth(),
       },
       fontFamily: {
-        outfit: ["Outfit"],
-        inter: ["Inter"],
+        serif: ["DMSerifDisplay-Regular"],
+        sans: ["Poppins-Regular"],
+        sansMedium: ["Poppins-Medium"],
+        sansBold: ["Poppins-Bold"],
         mono: ["JetBrainsMono"],
       },
     },

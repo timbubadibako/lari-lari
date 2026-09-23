@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LARI - Social Intelligence (Midnight Sapphire)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Jost', sans-serif; background: #020617; color: #f1f5f9; }
+        .font-serif { font-family: 'Bodoni Moda', serif; }
+        .glass { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(40px); border: 1px solid rgba(56, 189, 248, 0.1); }
+        .share-card { width: 375px; height: 667px; border-radius: 40px; position: relative; overflow: hidden; background: #020617; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .map-static { position: absolute; inset: 0; background: url('https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/12/2144/1454.png'); background-size: cover; filter: brightness(0.3); }
+        .path-line { position: absolute; top: 50%; left: 50%; width: 200px; height: 150px; border: 3px solid #38bdf8; clip-path: polygon(10% 20%, 90% 10%, 80% 90%, 20% 80%); transform: translate(-50%, -50%); box-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+    </style>
+</head>
+<body class="p-12 flex flex-col items-center justify-center min-h-screen">
+    <div class="max-w-4xl w-full text-center mb-12">
+        <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-sky-500 mb-2">Social Intelligence</h2>
+        <h1 class="text-4xl font-serif italic">Share Your Dominion</h1>
+    </div>
+
+    <!-- Instagram Story Style Share Mockup -->
+    <div class="share-card shadow-[0_50px_100px_rgba(0,0,0,0.8)]">
+        <div class="map-static"></div>
+        <div class="path-line"></div>
+        
+        <!-- Content Overlay -->
+        <div class="absolute inset-0 flex flex-col justify-between p-10 z-10">
+            <div>
+                <h1 class="text-4xl font-serif italic text-white tracking-tighter leading-none">Conquered.</h1>
+                <p class="text-[10px] uppercase tracking-[0.4em] text-sky-500 mt-2 font-bold">LARI Elite Performance</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex gap-10">
+                    <div>
+                        <p class="text-[9px] uppercase tracking-widest text-slate-500">Distance</p>
+                        <p class="text-3xl font-serif italic text-white">14.2 km</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] uppercase tracking-widest text-slate-500">Pace</p>
+                        <p class="text-3xl font-serif italic text-white">5'24"</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 border-t border-white/10 pt-6">
+                    <div class="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center font-serif italic text-black font-bold">Z</div>
+                    <div>
+                        <p class="text-[10px] font-bold tracking-widest uppercase">Zenith Vanguard</p>
+                        <p class="text-[8px] text-slate-500 uppercase tracking-tighter">South District Sector 12</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Watermark -->
+        <div class="absolute bottom-6 right-6 opacity-20">
+            <p class="text-[10px] font-serif italic">#LARIGame</p>
+        </div>
+    </div>
+
+    <button class="mt-12 bg-white text-black px-12 py-4 rounded-full font-medium text-xs uppercase tracking-widest hover:scale-105 transition-transform active:scale-95 shadow-xl">
+        Export Image
+    </button>
+</body>
+</html>

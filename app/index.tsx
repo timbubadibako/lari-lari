@@ -1,141 +1,16 @@
-import { View, Image, Pressable, Platform, StatusBar, ActivityIndicator, LayoutAnimation } from 'react-native';
+import { View, Pressable, Platform, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Map, MapUserLocation, MapRoute, GeoJSONSource, Layer } from '@/components/ui/map';
 import { Text } from '@/components/ui/text';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { useRunStore } from '@/lib/store';
-import { supabase } from '@/lib/supabase';
 import { BottomNav } from '@/components/ui/bottom-nav';
-
-// Modular Components
-import { TopBar } from '@/components/dashboard/top-bar';
-import { WidgetPanel } from '@/components/dashboard/widget-panel';
-import { ActionButtons } from '@/components/dashboard/action-buttons';
-import { HUDOverlay } from '@/components/dashboard/hud-overlay';
-import { VictoryModal } from '@/components/dashboard/victory-modal';
-
-// Helper to format time
-const formatTime = (seconds: number) => {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-  return `${h > 0 ? h + ':' : ''}${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-};
-
-const formatPace = (paceMinutes: number) => {
-  if (paceMinutes === 0 || !isFinite(paceMinutes)) return "--'--\"";
-  const m = Math.floor(paceMinutes);
-  const s = Math.floor((paceMinutes - m) * 60);
-  return `${m.toString().padStart(2, '0')}'${s.toString().padStart(2, '0')}"`;
-};
+import { Settings, Shield, ChevronRight, Activity, Crosshair } from 'lucide-react-native';
 
 export default function HomeScreen() {
-  const { isTracking, startTracking, stopTracking, updateTick, elapsedTime, distance, pace, route, addRoutePoint, profile, setProfile, territories, setTerritories, isHUDActive, setHUDActive, isSimulating, setSimulating } = useRunStore();
-
   const [initialRegion, setInitialRegion] = useState<[number, number]>([106.8272, -6.1751]); 
-  const [activeWidget, setActiveWidget] = useState<string | null>('level');
-  const [fetchingProfile, setFetchingProfile] = useState(true);
-  const [bellClicks, setBellClicks] = useState(0);
-  const [showSummary, setShowSummary] = useState(false);
-
-  // Recenter logic
-  const handleRecenter = async () => {
-    try {
-      const location = await Location.getLastKnownPositionAsync({}) || await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced, timeout: 3000 });
-      if (location) {
-        const jitter = (Math.random() - 0.5) * 0.00000001;
-        setInitialRegion([location.coords.longitude + jitter, location.coords.latitude + jitter]);
-      }
-    } catch (e) {
-      console.warn("GPS unavailable");
-    }
-  };
-
-  const triggerTestMode = () => {
-    setBellClicks(prev => {
-      const newCount = prev + 1;
-      if (newCount >= 3) {
-        setSimulating(true);
-        if (!isTracking) startTracking();
-        setHUDActive(true);
-        const [baseLng, baseLat] = initialRegion;
-        const testCoords = [
-          [baseLng, baseLat],
-          [baseLng + 0.001, baseLat],
-          [baseLng + 0.002, baseLat],
-          [baseLng + 0.002, baseLat - 0.0006],
-          [baseLng + 0.002, baseLat - 0.0012],
-          [baseLng + 0.0015, baseLat - 0.0012],
-          [baseLng + 0.0008, baseLat - 0.0012],
-          [baseLng, baseLat - 0.0012],
-          [baseLng, baseLat - 0.0008],
-          [baseLng, baseLat - 0.0004],
-          [baseLng, baseLat] 
-        ];
-        testCoords.forEach((coord, i) => {
-          setTimeout(() => { addRoutePoint(coord as [number, number]); }, i * 800); 
-        });
-        return 0;
-      }
-      return newCount;
-    });
-  };
-
-  const toggleWidget = (widget: string) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setActiveWidget(activeWidget === widget ? null : widget);
-  };
-
-  // Initial Sync
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) return;
-        const { data: p } = await supabase.from('profiles').select('*').eq('id', user.id).single();
-        const { count: tCount } = await supabase.from('territories').select('*', { count: 'exact', head: true }).eq('leader_id', user.id);
-        if (p) {
-          setProfile({ id: p.id, username: p.username || 'Pilot', display_name: p.display_name || 'Pilot', level: p.level || 1, xp: p.xp || 0, territory_count: tCount || 0 });
-        }
-        const { data: t } = await supabase.from('territories').select('id, name, boundary, leader_id');
-        if (t) setTerritories(t.map(x => ({ ...x, boundary: typeof x.boundary === 'string' ? JSON.parse(x.boundary) : x.boundary })));
-      } catch (e) { console.error(e); } finally { setFetchingProfile(false); }
-    }
-    fetchData();
-  }, []);
-
-  // FIXED TIMER: Uses ref to ensure strict 1s intervals
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  useEffect(() => {
-    if (isTracking) {
-       if (timerRef.current) clearInterval(timerRef.current);
-       timerRef.current = setInterval(() => {
-         updateTick();
-       }, 1000);
-    } else {
-       if (timerRef.current) {
-          clearInterval(timerRef.current);
-          timerRef.current = null;
-       }
-    }
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isTracking]);
-
-  useEffect(() => {
-    let sub: Location.LocationSubscription | null = null;
-    if (isTracking && !isSimulating) {
-      (async () => {
-        try {
-          sub = await Location.watchPositionAsync({ accuracy: Location.Accuracy.High, timeInterval: 3000, distanceInterval: 5 }, (loc) => {
-            addRoutePoint([loc.coords.longitude, loc.coords.latitude]);
-          });
-        } catch (e) { console.warn("GPS error:", e); }
-      })();
-    }
-    return () => sub?.remove();
-  }, [isTracking, isSimulating]);
-
+  
   useEffect(() => {
     (async () => {
       try {
@@ -147,74 +22,85 @@ export default function HomeScreen() {
     })();
   }, []);
 
-  if (fetchingProfile) {
-    return (
-      <View className="flex-1 bg-silver-white items-center justify-center">
-        <ActivityIndicator size="large" color="#C72222" />
-        <Text className="mt-4 font-outfit font-bold text-merah uppercase tracking-widest text-center px-10">Syncing War Room Data...</Text>
-      </View>
-    );
-  }
-
   return (
-    <View className="flex-1 bg-white">
-      {/* 1. MAP LAYER */}
-      <View className="absolute inset-0 z-0">
+    <View className="flex-1 bg-midnight-900">
+      <StatusBar barStyle="light-content" />
+
+      {/* 1. MAP LAYER (Dark Mode) */}
+      <View className="absolute inset-0 z-0 opacity-80">
         <Map center={initialRegion} zoom={15} showLoader={false}>
           <MapUserLocation />
-          {territories.map((t) => (
-            <GeoJSONSource key={t.id} id={`source-${t.id}`} data={t.boundary}>
-              <Layer id={`fill-${t.id}`} type="fill" paint={{ fillColor: t.leader_id === profile?.id ? '#C72222' : '#2C5A64', fillOpacity: 0.4 }} />
-              <Layer id={`line-${t.id}`} type="line" paint={{ lineColor: '#2C5A64', lineWidth: 3 }} />
-            </GeoJSONSource>
-          ))}
-          {route.length > 1 ? <MapRoute coordinates={route} color="#C72222" width={6} opacity={1} /> : null}
+          {/* Mock Territory highlighting for Midnight Sapphire */}
+          <GeoJSONSource id="mock-territory" data={{
+            type: 'Feature',
+            geometry: {
+              type: 'Polygon',
+              coordinates: [[[initialRegion[0]-0.005, initialRegion[1]-0.005], [initialRegion[0]+0.005, initialRegion[1]-0.005], [initialRegion[0]+0.005, initialRegion[1]+0.005], [initialRegion[0]-0.005, initialRegion[1]+0.005], [initialRegion[0]-0.005, initialRegion[1]-0.005]]]
+            },
+            properties: {}
+          }}>
+            <Layer id="fill-mock" type="fill" paint={{ fillColor: '#0ea5e9', fillOpacity: 0.15 }} />
+            <Layer id="line-mock" type="line" paint={{ lineColor: '#0ea5e9', lineWidth: 2 }} />
+          </GeoJSONSource>
         </Map>
       </View>
 
-      {/* 2. OVERLAY UI */}
-      {!showSummary && (
-        <>
-          {!isHUDActive && <TopBar profile={profile} onBellPress={triggerTestMode} />}
+      <SafeAreaView className="flex-1 pointer-events-box-none z-10">
+        
+        {/* Top Status Bar */}
+        <View className="flex-row justify-between items-start px-6 pt-4 pointer-events-auto">
+          <View className="bg-midnight-700/80 backdrop-blur-xl border border-sky-500/10 px-4 py-3 rounded-2xl flex-row items-center gap-4">
+            <View className="w-10 h-10 rounded-full bg-sky-500 items-center justify-center">
+              <Text className="font-serif italic text-slate-900 font-bold text-lg">Z</Text>
+            </View>
+            <View>
+              <Text className="text-[9px] uppercase tracking-widest text-slate-500">Operative Rank</Text>
+              <Text className="text-xs font-bold text-sky-400">Zenith Vanguard</Text>
+            </View>
+          </View>
+          <Pressable className="bg-midnight-700/80 backdrop-blur-xl border border-sky-500/10 w-12 h-12 rounded-2xl items-center justify-center active:scale-90">
+            <Settings size={24} color="#94a3b8" strokeWidth={1.5} />
+          </Pressable>
+        </View>
 
-          <SafeAreaView className="flex-1 pointer-events-box-none z-40">
-            {!isHUDActive ? (
-              <View className="flex-1 justify-between pointer-events-box-none p-4" style={{ marginTop: 60, marginBottom: 84 }}>
-                <WidgetPanel activeWidget={activeWidget} toggleWidget={toggleWidget} profile={profile} />
-                <ActionButtons 
-                  isTracking={isTracking} 
-                  onRecenter={handleRecenter} 
-                  onStart={() => { if (!isTracking) startTracking(); setHUDActive(true); }} 
-                  onMaximizeHUD={() => setHUDActive(true)}
-                  elapsedTime={elapsedTime}
-                  distance={distance}
-                  formatTime={formatTime}
-                />
-              </View>
-            ) : (
-              <HUDOverlay 
-                elapsedTime={elapsedTime} 
-                distance={distance} 
-                pace={pace} 
-                formatTime={formatTime} 
-                formatPace={formatPace} 
-                onMinimize={() => setHUDActive(false)} 
-                onStop={async () => { 
-                  await stopTracking(); 
-                  setHUDActive(false); 
-                  setShowSummary(true); 
-                }} 
-              />
-            )}
-          </SafeAreaView>
-          
-          {/* Bottom Nav inside screen to ensure Navigation Context */}
-          {!isHUDActive && <BottomNav activeTab="maps" />}
-        </>
-      )}
+        {/* Left Vertical Nav (Tactical Actions) */}
+        <View className="absolute left-6 top-[30%] space-y-3 pointer-events-auto">
+          <Pressable className="bg-midnight-700/80 backdrop-blur-xl w-12 h-12 rounded-xl items-center justify-center border-r-2 border-sky-500 shadow-[0_0_15px_rgba(14,165,233,0.2)]">
+            <Crosshair size={20} color="#38bdf8" />
+          </Pressable>
+          <Pressable className="bg-midnight-700/80 backdrop-blur-xl border border-white/5 w-12 h-12 rounded-xl items-center justify-center">
+            <Shield size={20} color="#64748b" />
+          </Pressable>
+          <Pressable className="bg-midnight-700/80 backdrop-blur-xl border border-white/5 w-12 h-12 rounded-xl items-center justify-center">
+            <Activity size={20} color="#64748b" />
+          </Pressable>
+        </View>
 
-      {/* 3. VICTORY MODAL (ABSOLUTE ROOT LEVEL) */}
-      {showSummary && <VictoryModal onClose={() => setShowSummary(false)} />}
+        {/* Bottom Controls (Above BottomNav) */}
+        <View className="absolute bottom-28 left-6 right-6 pointer-events-auto">
+          <View className="flex-row justify-between items-end mb-6">
+            <View className="bg-midnight-700/80 backdrop-blur-xl border border-white/5 p-5 rounded-[2rem] border-l-2 border-l-sky-500 min-w-[150px]">
+              <Text className="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Dominion Area</Text>
+              <Text className="text-3xl font-serif italic text-white leading-none">
+                42.8 <Text className="text-[10px] font-sans not-italic text-slate-500">KM²</Text>
+              </Text>
+            </View>
+            <Pressable className="w-14 h-14 bg-midnight-700/80 backdrop-blur-xl border border-white/5 rounded-full items-center justify-center shadow-lg active:scale-90 transition-transform">
+              <Crosshair size={24} color="#38bdf8" />
+            </Pressable>
+          </View>
+
+          <Pressable className="w-full bg-white py-5 rounded-full shadow-[0_20px_50px_rgba(255,255,255,0.1)] active:scale-95 transition-all items-center justify-center">
+            <Text className="text-slate-900 font-serif italic text-2xl tracking-tight leading-none">
+              Commence Mission
+            </Text>
+          </Pressable>
+        </View>
+
+      </SafeAreaView>
+
+      {/* Docked Bottom Nav */}
+      <BottomNav activeTab="maps" />
     </View>
   );
 }

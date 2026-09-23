@@ -108,8 +108,8 @@ function Map({
   const cameraRef = useRef<CameraRef | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const { colorScheme } = useTheme();
-  // Force light theme for now as the app is light-mode only
-  const theme = "light";
+  // Force dark theme to match Midnight Sapphire aesthetic
+  const theme = "dark";
 
   const mapStyle =
     theme === "dark"

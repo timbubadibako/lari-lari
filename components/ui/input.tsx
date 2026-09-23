@@ -5,7 +5,7 @@ function Input({ className, ...props }: React.ComponentProps<typeof TextInput> &
   return (
     <TextInput
       className={cn(
-        'text-foreground flex h-10 w-full min-w-0 flex-row items-center px-3 py-1 text-base leading-5 sm:h-9',
+        'w-full bg-white/5 border-b border-sky-500/20 py-4 px-4 text-sm tracking-widest text-white transition-all',
         props.editable === false &&
         cn(
           'opacity-50',
@@ -13,14 +13,15 @@ function Input({ className, ...props }: React.ComponentProps<typeof TextInput> &
         ),
         Platform.select({
           web: cn(
-            'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground outline-none transition-[color,box-shadow] md:text-sm',
-            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'placeholder:text-slate-700 outline-none transition-[color,box-shadow]',
+            'focus-visible:border-sky-500 focus-visible:bg-sky-500/5 focus-visible:pl-6',
             'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
           ),
-          native: 'placeholder:text-muted-foreground/50',
+          native: 'placeholder:text-slate-700 focus:border-sky-500 focus:bg-sky-500/5 focus:pl-6',
         }),
         className
       )}
+      placeholderTextColor="#334155"
       {...props}
     />
   );

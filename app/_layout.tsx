@@ -7,12 +7,16 @@ import { ThemeProvider } from '@/lib/theme-context';
 import { PortalHost } from '@rn-primitives/portal';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 // Keep the splash screen visible while we fetch the session
-SplashScreen.preventAutoHideAsync();
+// Safely prevent auto hide to avoid uncaught promise rejections
+SplashScreen.preventAutoHideAsync().catch(() => {
+  /* reloading the app might trigger some race conditions, ignore them */
+});
 
 export const unstable_settings = {
   initialRouteName: 'index',
@@ -24,6 +28,17 @@ export default function RootLayout() {
   const segments = useSegments();
   const router = useRouter();
   const navigationState = useRootNavigationState();
+
+  const [fontsLoaded] = useFonts({
+    'DMSerifDisplay-Regular': require('../assets/fonts/DMSerifDisplay-Regular.ttf'),
+    'DMSerifDisplay-Italic': require('../assets/fonts/DMSerifDisplay-Italic.ttf'),
+    'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
+    'JetBrainsMono': require('../assets/fonts/Poppins-Regular.ttf'), // Fallback for now if mono is needed
+  });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -39,7 +54,7 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (!isInitialized || !navigationState?.key) return;
+    if (!isInitialized || !navigationState?.key || !fontsLoaded) return;
 
     const inAuthGroup = segments[0] === 'auth';
 
@@ -49,9 +64,15 @@ export default function RootLayout() {
       router.replace('/');
     }
 
-    // Hide splash screen once we know which route to show
-    SplashScreen.hideAsync();
-  }, [session, segments, isInitialized, navigationState?.key]);
+    // Hide splash screen safely
+    SplashScreen.hideAsync().catch(() => {
+      // ignore
+    });
+  }, [session, segments, isInitialized, navigationState?.key, fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   // WE MUST ALWAYS RETURN <Stack> IN EXPO ROUTER v3
   // Returning a View/ActivityIndicator destroys the Navigation Context
@@ -67,7 +88,7 @@ export default function RootLayout() {
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
         <PortalHost />
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </ThemeProvider>
     </SafeAreaProvider>
   );
